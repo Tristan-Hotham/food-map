@@ -1,0 +1,486 @@
+region_key,region,country_iso3,dishes
+IDN:IDN-1224,Central Java,IDN,123
+IDN:IDN-1233,East Java,IDN,82
+IDN:IDN-1223,West Java,IDN,67
+ITA:Emilia-Romagna,Emilia-Romagna,ITA,51
+CHN:CHN-1180,Guangdong,CHN,48
+IDN:IDN-1234,South Kalimantan,IDN,45
+ITA:Campania,Campania,ITA,44
+ESP:Cataluña,Catalonia,ESP,44
+JPN:JPN-1847,Hokkaidō,JPN,44
+JPN:JPN-3502,Okinawa Prefecture,JPN,42
+ITA:Toscana,Tuscany,ITA,42
+ESP:Andalucía,Andalusia,ESP,38
+IDN:IDN-539,West Sumatra,IDN,38
+IDN:IDN-1136,Aceh,IDN,36
+FRA:Auvergne-Rhône-Alpes,Auvergne-Rhône-Alpes,FRA,34
+ITA:Piemonte,Piedmont,ITA,29
+ITA:Lazio,Lazio,ITA,28
+IDN:IDN-1227,Jakarta,IDN,28
+USA:USA-3559,New York,USA,26
+USA:USA-3521,California,USA,26
+ITA:Sardegna,Sardinia,ITA,26
+ESP:Castilla y León,Castile and León,ESP,26
+ITA:Veneto,Veneto,ITA,24
+IND:IND-2442,Kerala,IND,24
+ITA:Sicily,Sicily,ITA,24
+FRA:Provence-Alpes-Côte-d'Azur,Provence-Alpes-Côte d'Azur,FRA,23
+ITA:Liguria,Liguria,ITA,22
+IDN:IDN-381,North Sumatra,IDN,22
+JPN:JPN-1860,Tokyo,JPN,21
+IDN:IDN-1236,South Sulawesi,IDN,21
+ITA:Abruzzo,Abruzzo,ITA,21
+JPN:JPN-1840,Aichi Prefecture,JPN,21
+ITA:Lombardia,Lombardy,ITA,20
+ITA:Trentino-Alto Adige,Trentino-South Tyrol,ITA,20
+CHN:CHN-1809,Sichuan,CHN,19
+JPN:JPN-1841,Gifu Prefecture,JPN,19
+JPN:JPN-1852,Ōsaka Prefecture,JPN,17
+USA:USA-3535,Louisiana,USA,17
+IDN:IDN-1230,South Sumatra,IDN,17
+JPN:JPN-3501,Kagoshima Prefecture,JPN,17
+ESP:Valenciana,Valencian Community,ESP,16
+FRA:Grand Est,Grand Est,FRA,16
+ESP:Galicia,Galicia,ESP,16
+IDN:IDN-540,Yogyakarta,IDN,16
+USA:USA-3514,Minnesota,USA,16
+JPN:JPN-1857,Kanagawa Prefecture,JPN,16
+FRA:Normandie,Normandy,FRA,15
+DEU:DEU-1591,Bavaria,DEU,15
+ITA:Valle d'Aosta,Aosta Valley,ITA,15
+BEL:BEL-3474,Brussels Capital,BEL,15
+IND:IND-2446,Karnataka,IND,15
+IND:IND-20011,Telangana,IND,14
+ITA:Basilicata,Basilicata,ITA,14
+JPN:JPN-3500,Nagasaki Prefecture,JPN,14
+ESP:Castilla-La Mancha,Castilla-La Mancha,ESP,14
+IDN:IDN-513,North Sulawesi,IDN,14
+JPN:JPN-1849,Hyōgo Prefecture,JPN,14
+IDN:IDN-1930,Jambi,IDN,14
+CHN:CHN-1155,Beijing,CHN,13
+CAN:CAN-683,Quebec,CAN,13
+IND:IND-2447,Maharashtra,IND,13
+USA:USA-3560,Pennsylvania,USA,13
+JPN:JPN-1862,Akita Prefecture,JPN,13
+ESP:Murcia,Murcia,ESP,13
+JPN:JPN-1821,Hiroshima Prefecture,JPN,13
+JPN:JPN-1867,Niigata Prefecture,JPN,13
+FRA:Bretagne,Brittany,FRA,12
+FRA:Occitanie,Occitania,FRA,12
+CHN:CHN-1178,Fujian,CHN,12
+IND:IND-2444,Odisha,IND,12
+FRA:Nouvelle-Aquitaine,Nouvelle-Aquitaine,FRA,12
+IND:IND-3264,Gujarat,IND,12
+IDN:IDN-1837,Gorontalo,IDN,12
+JPN:JPN-1850,Kyōto Prefecture,JPN,12
+JPN:JPN-1843,Mie Prefecture,JPN,12
+JPN:JPN-1855,Chiba Prefecture,JPN,12
+JPN:JPN-1829,Fukuoka Prefecture,JPN,12
+JPN:JPN-1864,Fukushima Prefecture,JPN,12
+JPN:JPN-1835,Ōita Prefecture,JPN,12
+JPN:JPN-1842,Ishikawa Prefecture,JPN,12
+JPN:JPN-1830,Kumamoto Prefecture,JPN,12
+JPN:JPN-1822,Okayama Prefecture,JPN,12
+JPN:JPN-1863,Aomori Prefecture,JPN,11
+IND:IND-3253,Uttar Pradesh,IND,10
+IND:IND-3258,Bihar,IND,10
+USA:USA-3517,Hawaii,USA,10
+CHN:CHN-1818,Jiangsu,CHN,10
+IDN:IDN-1232,Bali,IDN,10
+JPN:JPN-1868,Yamagata Prefecture,JPN,10
+IND:IND-3265,Goa,IND,9
+IND:IND-3257,West Bengal,IND,9
+IDN:IDN-1229,Lampung,IDN,9
+GBR:South West,South West,GBR,9
+NGA:NGA-2860,Delta State,NGA,9
+JPN:JPN-1832,Ehime Prefecture,JPN,9
+JPN:JPN-1844,Nagano Prefecture,JPN,9
+ITA:Molise,Molise,ITA,8
+FRA:Bourgogne-Franche-Comté,Bourgogne-Franche-Comté,FRA,8
+IND:IND-3250,Rajasthan,IND,8
+ITA:Marche,Marche,ITA,8
+ESP:Aragón,Aragon,ESP,8
+JPN:JPN-1859,Tochigi Prefecture,JPN,8
+JPN:JPN-1851,Nara Prefecture,JPN,8
+JPN:JPN-1845,Shizuoka Prefecture,JPN,8
+JPN:JPN-1827,Saga Prefecture,JPN,8
+DEU:DEU-1601,Saxony,DEU,7
+USA:USA-3536,Texas,USA,7
+IDN:IDN-1228,West Kalimantan,IDN,7
+PRT:Norte,Norte (north),PRT,7
+USA:USA-3546,Illinois,USA,7
+DEU:DEU-1574,Hesse,DEU,7
+ESP:Cantabria,Cantabria,ESP,7
+NGA:NGA-2842,Akwa Ibom State,NGA,7
+NGA:NGA-2847,Cross River State,NGA,7
+JPN:JPN-1866,Miyagi Prefecture,JPN,7
+CHN:CHN-1810,Yunnan,CHN,7
+IDN:IDN-1226,Banten,IDN,7
+NGA:NGA-2855,Osun State,NGA,7
+JPN:JPN-1834,Kōchi Prefecture,JPN,7
+JPN:JPN-1848,Fukui Prefecture,JPN,7
+JPN:JPN-1846,Toyama Prefecture,JPN,7
+JPN:JPN-1858,Saitama Prefecture,JPN,7
+DEU:DEU-1573,Baden-Württemberg,DEU,6
+PRT:Lisbon,Lisbon,PRT,6
+TUR:TUR-2230,İzmir,TUR,6
+DEU:DEU-1572,North Rhine-Westphalia,DEU,6
+FRA:Centre-Val de Loire,Centre-Val de Loire,FRA,6
+ESP:Canary Is.,Canary Islands,ESP,6
+BRA:BRA-1311,São Paulo,BRA,6
+USA:USA-3562,Michigan,USA,6
+IDN:IDN-555,West Nusa Tenggara,IDN,6
+USA:USA-3558,New Jersey,USA,6
+CHN:CHN-1814,Shandong,CHN,6
+GBR:Scotland,Scotland,GBR,6
+NGA:NGA-2862,Enugu State,NGA,6
+NGA:NGA-2843,Imo State,NGA,6
+JPN:JPN-1825,Tottori Prefecture,JPN,6
+TUR:TUR-2264,Bursa,TUR,5
+IND:IND-3263,Tamil Nadu,IND,5
+ESP:Islas Baleares,Balearic Islands,ESP,5
+USA:USA-3552,Virginia,USA,5
+USA:USA-3557,Maryland,USA,5
+ESP:País Vasco,Basque Country,ESP,5
+JPN:JPN-1861,Yamanashi Prefecture,JPN,5
+NGA:NGA-2864,Kaduna State,NGA,5
+GBR:North West,North West,GBR,5
+ESP:Madrid,Madrid,ESP,5
+JPN:JPN-1853,Shiga Prefecture,JPN,5
+BEL:BEL-3478,East Flanders,BEL,5
+IDN:IDN-1235,East Nusa Tenggara,IDN,5
+BRA:BRA-594,Pará,BRA,5
+MEX:MEX-2714,Nuevo León,MEX,5
+JPN:JPN-1865,Iwate Prefecture,JPN,5
+JPN:JPN-1831,Miyazaki Prefecture,JPN,5
+JPN:JPN-1826,Yamaguchi Prefecture,JPN,5
+VNM:VNM-501,Ho Chi Minh,VNM,4
+GRC:GRC-2990,Crete,GRC,4
+CHN:CHN-1808,Hunan,CHN,4
+BRA:BRA-601,Minas Gerais,BRA,4
+CHN:CHN-1820,Zhejiang,CHN,4
+TUR:TUR-3017,Şanlıurfa,TUR,4
+USA:USA-3513,Massachusetts,USA,4
+GBR:South East,South East,GBR,4
+DEU:DEU-1577,Thuringia,DEU,4
+USA:USA-3519,Washington,USA,4
+KOR:KOR-2497,Seoul,KOR,4
+GBR:Greater London,Greater London,GBR,4
+PRT:Alentejo,Alentejo,PRT,4
+BEL:BEL-3481,Liège,BEL,4
+IDN:IDN-1185,East Kalimantan,IDN,4
+USA:USA-3545,South Carolina,USA,4
+ITA:Apulia,Apulia,ITA,4
+IND:IND-2441,Andhra Pradesh,IND,4
+NGA:NGA-2846,Benue State,NGA,4
+KOR:KOR-2505,South Gyeongsang,KOR,4
+CHE:CHE-167,St. Gallen,CHE,4
+ITA:Friuli-Venezia Giulia,Friuli-Venezia Giulia,ITA,4
+NGA:NGA-2850,Lagos,NGA,4
+ESP:Extremadura,Extremadura,ESP,4
+JPN:JPN-1836,Tokushima Prefecture,JPN,4
+JPN:JPN-1856,Ibaraki Prefecture,JPN,4
+JPN:JPN-3503,Gunma Prefecture,JPN,4
+JPN:JPN-1854,Wakayama Prefecture,JPN,4
+NGA:NGA-2849,Kwara State,NGA,4
+USA:USA-3540,Vermont,USA,3
+GBR:Yorkshire and the Humber,Yorkshire and the Humber,GBR,3
+ESP:Asturias,Asturias,ESP,3
+MYS:MYS-1145,Melaka,MYS,3
+FRA:Hauts-de-France,Hauts-de-France,FRA,3
+GBR:Wales,Wales,GBR,3
+CHN:CHN-1807,Hubei,CHN,3
+POL:POL-3142,West Pomeranian Voivodeship,POL,3
+VNM:VNM-462,Hanoi,VNM,3
+CHN:CHN-1812,Henan,CHN,3
+CHE:CHE-3422,Vaud,CHE,3
+GBR:East Midlands,East Midlands,GBR,3
+ITA:Umbria,Umbria,ITA,3
+MEX:MEX-2724,Puebla,MEX,3
+MEX:MEX-2737,Yucatán,MEX,3
+IDN:IDN-538,North Maluku,IDN,3
+ARG:ARG-5493,Buenos Aires,ARG,3
+ESP:Foral de Navarra,Navarre,ESP,3
+USA:USA-3550,Ohio,USA,3
+USA:USA-3553,Wisconsin,USA,3
+CAN:CAN-633,British Columbia,CAN,3
+IDN:IDN-557,Central Sulawesi,IDN,3
+TUR:TUR-3016,Gaziantep,TUR,3
+MEX:MEX-2723,Oaxaca,MEX,3
+MAC:MAC+00?,Macau,MAC,3
+FRA:Pays de la Loire,Pays de la Loire,FRA,3
+HKG:HKG-5153,Central and Western District,HKG,3
+USA:USA-3548,Kentucky,USA,3
+CHN:CHN-1152,Guangxi,CHN,3
+NGA:NGA-2852,Ogun State,NGA,3
+CHN:CHN-1839,Heilongjiang,CHN,3
+RUS:RUS-2416,Chechen Republic,RUS,3
+CHE:CHE-166,Appenzell Ausserrhoden,CHE,3
+CHE:CHE-3473,Appenzell Innerrhoden,CHE,3
+PRK:PRK-3305,Pyongyang,PRK,3
+NGA:NGA-2861,Edo State,NGA,3
+UKR:UKR-328,Kharkiv,UKR,3
+JPN:JPN-1833,Kagawa Prefecture,JPN,3
+CHE:CHE-3421,Fribourg,CHE,3
+IDN:IDN-1231,Bangka Belitung Islands,IDN,3
+GEO:GEO-3027,Adjara,GEO,2
+CHN:CHN-1756,Xinjiang,CHN,2
+UKR:UKR-4826,Kyiv,UKR,2
+USA:USA-3563,Alaska,USA,2
+KOR:KOR-2495,Incheon,KOR,2
+CHN:CHN-1775,Hainan,CHN,2
+RUS:RUS-2612,Sakha Republic,RUS,2
+SWE:SWE-182,Kronoberg,SWE,2
+RUS:RUS-2394,Republic of Tatarstan,RUS,2
+AUT:AUT-2331,Vienna,AUT,2
+KOR:KOR-2498,Gyeonggi,KOR,2
+FRA:Île-de-France,Île-de-France,FRA,2
+IDN:IDN-1933,West Papua,IDN,2
+TUR:TUR-2285,Mersin,TUR,2
+CHN:CHN-1154,Chongqing,CHN,2
+DEU:DEU-1580,Rhineland-Palatinate,DEU,2
+CHE:CHE-3425,Basel-Stadt,CHE,2
+CHN:CHN-1150,Gansu,CHN,2
+TUR:TUR-2277,Manisa,TUR,2
+MYS:MYS-1187,Sarawak,MYS,2
+KOR:KOR-2509,North Gyeongsang,KOR,2
+CHE:CHE-3424,Bern,CHE,2
+BRA:BRA-612,Rio Grande do Sul,BRA,2
+BRA:BRA-624,Bahia,BRA,2
+SWE:SWE-190,Norrbotten,SWE,2
+DEU:DEU-1579,Schleswig-Holstein,DEU,2
+PAK:PAK-1114,Sindh,PAK,2
+BRA:BRA-592,Amazonas,BRA,2
+TUR:TUR-2299,Erzurum,TUR,2
+CHE:CHE-165,Valais,CHE,2
+ISR:ISR-3058,Jerusalem,ISR,2
+CHN:CHN-1805,Shanxi,CHN,2
+PRK:PRK-3303,North Hwanghae,PRK,2
+BRA:BRA-1313,Pernambuco,BRA,2
+TUR:TUR-3011,Konya,TUR,2
+NGA:NGA-2841,Abia State,NGA,2
+USA:USA-3522,Colorado,USA,2
+AUT:AUT-2326,Upper Austria,AUT,2
+TUR:TUR-2302,Trabzon,TUR,2
+ROU:ROU-296,Cluj,ROU,2
+CHN:CHN-1816,Tianjin,CHN,2
+ARG:ARG-1295,Buenos Aires,ARG,2
+CHE:CHE-174,Thurgau,CHE,2
+BOL:BOL-1291,Cochabamba,BOL,2
+TUR:TUR-3008,Ankara,TUR,2
+CHN:CHN-1662,Tibet,CHN,2
+NGA:NGA-2845,Bayelsa State,NGA,2
+GBR:West Midlands,West Midlands,GBR,2
+FIN:FIN-3188,South Karelia,FIN,2
+IND:IND-2478,Manipur,IND,2
+NGA:NGA-2869,Kano State,NGA,2
+KOR:KOR-2510,Jeju,KOR,2
+IDN:IDN-556,Southeast Sulawesi,IDN,2
+GBR:Northern Ireland,Northern Ireland,GBR,2
+UKR:UKR-319,Cherkasy,UKR,2
+ESP:La Rioja,La Rioja,ESP,2
+GRC:GRC-2883,Ionian Islands,GRC,2
+MYS:MYS-1149,Terengganu,MYS,2
+MYS:MYS-1144,Kelantan,MYS,2
+ITA:Calabria,Calabria,ITA,2
+CHE:CHE-163,Lucerne,CHE,2
+PER:PER-567,Piura,PER,2
+NGA:NGA-2844,Rivers State,NGA,2
+GRC:GRC-2885,Peloponnese,GRC,2
+SWE:SWE-3428,Västra Götaland,SWE,2
+UKR:UKR-322,Odessa,UKR,2
+BGD:BGD-1806,Dhaka,BGD,2
+IDN:IDN-492,Riau,IDN,2
+UKR:UKR-325,Sumy,UKR,2
+USA:USA-3524,New Mexico,USA,2
+SWE:SWE-194,Stockholm,SWE,2
+NGA:NGA-2854,Ekiti State,NGA,2
+FIN:FIN-3183,Southern Ostrobothnia,FIN,2
+RUS:RUS-2383,Komi Republic,RUS,1
+MEX:MEX-2706,Baja California,MEX,1
+MEX:MEX-2708,Coahuila,MEX,1
+GEO:GEO-3030,Imereti,GEO,1
+GEO:GEO-3035,Racha-Lechkhumi and Kvemo Svaneti,GEO,1
+SWE:SWE-191,Västernorrland,SWE,1
+GEO:GEO-3033,Kakheti,GEO,1
+TUR:TUR-2283,Kahramanmaraş,TUR,1
+ARE:ARE-350,Emirate of Dubai,ARE,1
+CHN:CHN-1153,Guizhou,CHN,1
+FIN:FIN-3178,Northern Savonia,FIN,1
+FIN:FIN-3190,North Karelia,FIN,1
+MAR:MAR-1446,Fès-méknas-boulmane,MAR,1
+USA:USA-3542,Florida,USA,1
+AUS:AUS-2657,Queensland,AUS,1
+FRA:Corse,Corsica,FRA,1
+BEL:BEL-3475,Flemish Brabant,BEL,1
+SWE:SWE-178,Gävleborg,SWE,1
+IND:IND-3249,Punjab,IND,1
+TUR:TUR-3018,Adana,TUR,1
+DEU:DEU-1578,Hamburg,DEU,1
+DEU:DEU-3487,Brandenburg,DEU,1
+SWE:SWE-262,Blekinge,SWE,1
+PHL:PHL-5538,Angeles,PHL,1
+SWE:SWE-3429,Skåne,SWE,1
+PAK:PAK-1123,Khyber Pakhtunkhwa,PAK,1
+IDN:IDN-558,Papua,IDN,1
+USA:USA-3549,North Carolina,USA,1
+THA:THA-385,Satun,THA,1
+USA:USA-3544,Mississippi,USA,1
+LVA:LVA-1094,Riga,LVA,1
+THA:THA-390,Chiang Mai,THA,1
+THA:THA-389,Chiang Rai,THA,1
+THA:THA-374,Mae Hong Son,THA,1
+TWN:TWN-1160,Tainan,TWN,1
+POL:POL-3145,Kuyavian-Pomeranian Voivodeship,POL,1
+SWE:SWE-179,Jönköping,SWE,1
+CAN:CAN-682,Ontario,CAN,1
+TUR:TUR-2272,Afyonkarahisar,TUR,1
+RUS:RUS-2368,Tula,RUS,1
+POL:POL-3144,Greater Poland Voivodeship,POL,1
+VNM:VNM-490,Thừa Thiên Huế,VNM,1
+CHN:CHN-1811,Hebei,CHN,1
+NLD:NLD-3483,North Brabant,NLD,1
+TWN:TWN-1166,Taipei,TWN,1
+NLD:NLD-895,Friesland,NLD,1
+TWN:TWN-1167,New Taipei,TWN,1
+IDN:IDN-1931,Central Kalimantan,IDN,1
+SWE:SWE-192,Västerbotten,SWE,1
+TWN:TWN-1170,Chiayi,TWN,1
+AZE:AZE-5564,Shaki,AZE,1
+CHN:CHN-1804,Shaanxi,CHN,1
+GEO:GEO-3034,Mtskheta-Mtianeti,GEO,1
+NGA:NGA-2856,Oyo State,NGA,1
+BEL:BEL-3477,Luxembourg,BEL,1
+MEX:MEX-2734,Veracruz,MEX,1
+MEX:MEX-2736,Quintana Roo,MEX,1
+SRB:SRB-281,Srem,SRB,1
+KOR:KOR-2502,South Chungcheong,KOR,1
+KOR:KOR-2507,Busan,KOR,1
+USA:USA-3547,Indiana,USA,1
+MAR:MAR-1452,Meknès-Tafilalet,MAR,1
+PHL:PHL-2561,La Union,PHL,1
+BEL:BEL-3480,Antwerp,BEL,1
+TUR:TUR-2238,Balıkesir,TUR,1
+USA:USA-3551,Tennessee,USA,1
+DEU:DEU-1599,Berlin,DEU,1
+URY:URY-8,Paysandú,URY,1
+NGA:NGA-2865,Kogi State,NGA,1
+TUR:TUR-3040,Kars,TUR,1
+HKG:HKG-5170,Lantau Island,HKG,1
+ROU:ROU-314,Buzău,ROU,1
+NLD:NLD-896,Gelderland,NLD,1
+THA:THA-407,Chai Nat,THA,1
+SWE:SWE-188,Värmland,SWE,1
+BGD:BGD-3255,Rajshahi,BGD,1
+TZA:TZA-3388,Mtwara,TZA,1
+TZA:TZA-3387,Lindi,TZA,1
+USA:USA-3537,Connecticut,USA,1
+VNM:VNM-498,An Giang,VNM,1
+MYS:MYS-1186,Sabah,MYS,1
+TUR:TUR-2291,Çorum,TUR,1
+SVN:SVN-969,Metlika,SVN,1
+IRL:IRL-5569,Cork,IRL,1
+KOR:KOR-2499,North Jeolla,KOR,1
+GRC:GRC-2989,Central Greece,GRC,1
+RUS:RUS-2385,Mari El Republic,RUS,1
+POL:POL-3141,Lower Silesian Voivodeship,POL,1
+BRA:BRA-1294,Goiás,BRA,1
+MMR:MMR-3275,Ayeyarwady,MMR,1
+CAN:CAN-631,Saskatchewan,CAN,1
+FIN:FIN-3180,Northern Ostrobothnia,FIN,1
+TWN:TWN-3414,Penghu,TWN,1
+LTU:LTU-1067,Alytus,LTU,1
+SRB:SRB-1059,South Bačka,SRB,1
+PHL:PHL-5526,Iloilo,PHL,1
+LVA:LVA-5758,Carnikava,LVA,1
+CAN:CAN-684,New Brunswick,CAN,1
+POL:POL-3146,Silesian Voivodeship,POL,1
+PSE:WEB+00?,West Bank,PSE,1
+MDG:MDG-5872,Diana,MDG,1
+POL:POL-3167,Opole Voivodeship,POL,1
+UZB:UZB-358,Samarqand,UZB,1
+USA:USA-3531,Missouri,USA,1
+TUR:TUR-2297,Tokat,TUR,1
+NLD:NLD-903,Zeeland,NLD,1
+NLD:NLD-3484,Utrecht,NLD,1
+VNM:VNM-487,Quảng Nam,VNM,1
+CAN:CAN-686,Newfoundland and Labrador,CAN,1
+PRT:PRT-735,Azores,PRT,1
+PRK:PRK-3311,South Hamgyong,PRK,1
+TWN:TWN-1172,Hualien,TWN,1
+IND:IND-2431,Jammu and Kashmir,IND,1
+TUR:TUR-2287,Kayseri,TUR,1
+KHM:KHM-1794,Mondulkiri,KHM,1
+VNM:VNM-499,Cần Thơ,VNM,1
+VNM:VNM-496,Bình Thuận,VNM,1
+BRA:BRA-613,Paraná,BRA,1
+UKR:UKR-318,Volyn,UKR,1
+BRA:BRA-600,Mato Grosso do Sul,BRA,1
+IDN:IDN-1796,Riau Islands,IDN,1
+TWN:TWN-1168,Taoyuan,TWN,1
+MEX:MEX-2719,Jalisco,MEX,1
+VNM:VNM-488,Quảng Ngãi,VNM,1
+TUR:TUR-2270,Kastamonu,TUR,1
+TUR:TUR-3043,Siirt,TUR,1
+TUR:TUR-2311,Bitlis,TUR,1
+KOR:KOR-2504,Daegu,KOR,1
+JPN:JPN-1824,Shimane Prefecture,JPN,1
+RUS:RUS-2399,Altai Republic,RUS,1
+NLD:NLD-3486,North Holland,NLD,1
+SVN:SVN-254,Bloke,SVN,1
+PER:PER-578,Cajamarca,PER,1
+ARM:ARM-1555,Shirak,ARM,1
+VNM:VNM-429,Quảng Ninh,VNM,1
+MAR:MAR-1454,Oriental,MAR,1
+MYS:MYS-1140,Kedah,MYS,1
+BGR:BGR-2235,Plovdiv,BGR,1
+BOL:BOL-1936,La Paz,BOL,1
+COD:COD-1894,South Kivu,COD,1
+CUB:CUB-5489,Mayabeque,CUB,1
+GEO:GEO-3029,Samegrelo-Zemo Svaneti,GEO,1
+POL:POL-3149,Świętokrzyskie Voivodeship,POL,1
+PRT:Centro,Centro (centre),PRT,1
+VEN:VEN-33,Carabobo,VEN,1
+MEX:MEX-2731,State of Mexico,MEX,1
+UKR:UKR-330,Poltava,UKR,1
+TUR:TUR-2301,Rize,TUR,1
+BEL:BEL-3476,Namur,BEL,1
+TWN:TWN-1163,Yilan,TWN,1
+TUR:TUR-3044,Şırnak,TUR,1
+TUR:TUR-2295,Sivas,TUR,1
+NLD:NLD-3485,South Holland,NLD,1
+ROU:ROU-4847,Tulcea,ROU,1
+TWN:TWN-1174,Taichung City,TWN,1
+CAN:CAN-632,Alberta,CAN,1
+UKR:UKR-329,Luhansk,UKR,1
+ARG:ARG-1310,Santa Fe,ARG,1
+BEL:BEL-3,Limburg,BEL,1
+UKR:UKR-320,Kirovohrad,UKR,1
+KOR:KOR-2503,Daejeon,KOR,1
+USA:USA-3539,Rhode Island,USA,1
+UKR:UKR-327,Donetsk,UKR,1
+IDN:IDN-1237,West Sulawesi,IDN,1
+TUR:TUR-2298,Artvin,TUR,1
+VNM:VNM-510,Vĩnh Long,VNM,1
+UKR:UKR-326,Dnipropetrovsk,UKR,1
+SVN:SVN-1017,Škofja Loka,SVN,1
+TUR:TUR-3041,Mardin,TUR,1
+SWE:SWE-184,Östergötland,SWE,1
+NGA:NGA-2853,Ondo State,NGA,1
+NGA:NGA-2871,Sokoto State,NGA,1
+BRA:BRA-621,Ceará,BRA,1
+NGA:NGA-2881,Adamawa State,NGA,1
+MDG:MDG-5879,Sava,MDG,1
+NGA:NGA-2870,Katsina State,NGA,1
+MYS:MYS-1143,Johor,MYS,1
+TWN:TWN-1169,Changhua,TWN,1
+MYS:MYS-1137,Perak,MYS,1
+BRA:BRA-622,Piauí,BRA,1
+NGA:NGA-2859,Gombe State,NGA,1
+HUN:HUN-3161,Bács-Kiskun,HUN,1
+MYS:MYS-1147,Pahang,MYS,1
+TUR:TUR-2296,Samsun,TUR,1
+GIN:GIN-5629,Boké,GIN,1
+FIN:FIN-3182,Ostrobothnia,FIN,1
+MEX:MEX-2732,Morelos,MEX,1
+ISL:ISL-705,Southern,ISL,1

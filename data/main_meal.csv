@@ -1,0 +1,56 @@
+iso3,country,main_meal,lunch_from,lunch_to,dinner_from,dinner_to,lunch_mid_clock,dinner_mid_clock,clock_ahead_of_sun_min,lunch_mid_sun,dinner_mid_sun,regional_statement,note,source
+ALB,Albania,midday,,,,,,,15.1,,,0,Lunch is traditionally the biggest meal; supper is smaller.,https://en.wikipedia.org/wiki/Albanian_cuisine
+ARG,Argentina,midday,12:00,14:00,,,13.0,,65.8,11.9,,0,"Lunch is usually the main meal, between noon and 2 pm.",https://en.wikipedia.org/wiki/Lunch
+AUT,Austria,shifting,,,,,,,35.1,,,0,The midday meal was the main meal; it is now often eaten in the evening.,https://en.wikipedia.org/wiki/Austrian_cuisine
+BOL,Bolivia,midday,12:00,14:00,20:00,21:00,13.0,20.5,23.1,12.61,20.11,0,"Long lunches, shops close 12 to 2 pm; dinner is lighter, at 8 pm or later.",https://en.wikipedia.org/wiki/Bolivian_cuisine
+BIH,Bosnia and Herzegovina,midday,14:00,14:00,,,14.0,,22.4,13.63,,0,"Lunch is the day's main meal, normally around 2 pm.",https://en.wikipedia.org/wiki/Lunch
+BRA,Brazil,midday,11:30,14:00,,,12.75,,-1.2,12.77,,0,"Lunch is the main meal, between 11.30 am and 2 pm.",https://en.wikipedia.org/wiki/Lunch
+BGR,Bulgaria,,12:00,14:00,,,13.0,,54.4,12.09,,0,Lunch is normally between noon and 2 pm.,https://en.wikipedia.org/wiki/Lunch
+CAN,Canada,evening,12:00,12:00,17:00,19:00,12.0,18.0,56.0,11.07,17.07,0,Lunch around noon; dinner between 5 and 7 pm and heartier.,https://en.wikipedia.org/wiki/Canadian_cuisine
+TCD,Chad,evening,,,,,,,-9.0,,,0,The day's main meal is typically eaten in the evening.,https://en.wikipedia.org/wiki/Chadian_cuisine
+CHN,People's Republic of China,,12:00,14:00,18:00,21:00,13.0,19.5,24.7,12.59,19.09,0,"Breakfast 6 to 9 am, lunch 12 to 2 pm, dinner 6 to 9 pm.",https://en.wikipedia.org/wiki/Chinese_cuisine
+DNK,Denmark,evening,,,,,,,50.1,,,0,"The evening meal is still sometimes called middag, as hot meals were once eaten at midday.",https://en.wikipedia.org/wiki/Danish_cuisine
+ECU,Ecuador,midday,,,,,,,17.0,,,0,"Dinner is usually lighter, sometimes just coffee and bread.",https://en.wikipedia.org/wiki/Latin_American_cuisine
+EGY,Egypt,midday,,,,,,,26.2,,,0,The main meal is usually lunch; evenings bring lighter meals.,https://en.wikipedia.org/wiki/Egyptian_cuisine
+FIN,Finland,evening,12:00,12:00,,,12.0,,54.6,11.09,,0,Dinner is the most substantial meal; lunch around noon is warm.,https://en.wikipedia.org/wiki/Finnish_cuisine
+FRA,France,,12:00,14:00,19:30,22:00,13.0,20.75,81.3,11.65,19.4,0,Lunch from noon; restaurants open for dinner at 7.30 pm.,https://en.wikipedia.org/wiki/French_cuisine
+DEU,Germany,shifting,,,,,,,55.8,,,0,Lunch was traditionally the main meal; in Berlin it is now often the evening meal.,https://en.wikipedia.org/wiki/German_cuisine
+GRC,Greece,midday,,,,,,,60.9,,,0,Named alongside Spain and Portugal as places where lunch is the main meal.,https://en.wikipedia.org/wiki/Yemeni_cuisine
+HUN,Hungary,midday,12:00,14:00,18:00,21:00,13.0,19.5,17.2,12.71,19.21,0,"Lunch is traditionally the main meal; breakfast 6 to 9, lunch 12 to 2, dinner 6 to 9.",https://en.wikipedia.org/wiki/Hungarian_cuisine
+IND,India,evening,,,,,,,9.4,,,0,Dinner is considered the main meal of the day.,https://en.wikipedia.org/wiki/Indian_cuisine
+IDN,Indonesia,midday,,,,,,,-7.0,,,0,"Lunch is often the main meal, cooked in the late morning.",https://en.wikipedia.org/wiki/Indonesian_cuisine
+ITA,Italy,evening,12:30,14:00,,,13.25,,46.1,12.48,,0,"Lunch is a full meal but lighter than supper; 12.30 in the north, 2 pm in the centre and south.",https://en.wikipedia.org/wiki/Lunch
+LVA,Latvia,midday,12:00,15:00,,,13.5,,56.7,12.56,,0,"Lunch, from noon to 3 pm, tends to be the main meal.",https://en.wikipedia.org/wiki/Latvian_cuisine
+LTU,Lithuania,morning,,,,,,,59.2,,,0,"Breakfast was the most filling meal, and evening meals are still light.",https://en.wikipedia.org/wiki/Lithuanian_cuisine
+MLI,Mali,midday,,,,,,,26.0,,,0,Lunch is the most substantial meal.,https://en.wikipedia.org/wiki/Malian_cuisine
+MEX,Mexico,midday,14:00,16:00,,,15.0,,35.9,14.4,,0,"Lunch is usually the main meal, between 2 and 4 pm.",https://en.wikipedia.org/wiki/Lunch
+MCO,Monaco,midday,,,,,,,,,,0,Traditionally lunch is the main meal.,https://en.wikipedia.org/wiki/Monégasque_cuisine
+NZL,New Zealand,evening,,,,,,,53.9,,,0,83% of households ate their main meal in the evening in 1982.,https://en.wikipedia.org/wiki/New_Zealand_cuisine
+NOR,Norway,,,,16:00,19:00,,17.5,54.8,,16.59,0,Dinner usually starts around 4 to 7 pm.,https://en.wikipedia.org/wiki/Norwegian_cuisine
+OMN,Oman,midday,,,,,,,11.5,,,0,The main meal is usually at midday; dinner is lighter.,https://en.wikipedia.org/wiki/Omani_cuisine
+PSE,Palestine,midday,,,20:00,22:00,,21.0,,,,0,Lunch is the heaviest meal; dinner from 8 to 10 pm.,https://en.wikipedia.org/wiki/Palestinian_cuisine
+PHL,Philippines,evening,,,18:00,20:00,,19.0,-10.0,,19.17,0,"Dinner is still the main meal, usually 6 to 8 pm.",https://en.wikipedia.org/wiki/Filipino_cuisine
+POL,Poland,midday,13:00,17:00,,,15.0,,17.3,14.71,,0,"The main meal, obiad, is eaten between 1 and 5 pm.",https://en.wikipedia.org/wiki/Lunch
+PRT,Portugal,midday,12:00,14:00,20:00,20:00,13.0,20.0,70.0,11.83,18.83,0,Lunch between noon and 2 pm is the main meal; dinner around 8 pm.,https://en.wikipedia.org/wiki/Portuguese_cuisine
+ROU,Romania,midday,,,,,,,53.7,,,0,Lunch is the main hot meal of the day.,https://en.wikipedia.org/wiki/Lunch
+RUS,Russia,midday,,,,,,,35.7,,,0,"Lunch, in the afternoon, is typically the biggest meal.",https://en.wikipedia.org/wiki/Lunch
+RWA,Rwanda,midday,,,,,,,0.6,,,0,Lunch is generally the main meal.,https://en.wikipedia.org/wiki/Rwandan_cuisine
+SRB,Serbia,midday,,,,,,,11.9,,,0,"Lunch, in the early afternoon, is the most important meal; dinner is light.",https://en.wikipedia.org/wiki/Serbian_cuisine
+SVK,Slovakia,shifting,12:00,12:00,,,12.0,,17.2,11.71,,0,Lunch around noon was the main meal; many now eat it in the evening.,https://en.wikipedia.org/wiki/Slovak_cuisine
+SOM,Somalia,,,,21:00,21:00,,21.0,-0.4,,21.01,0,Dinner is served as late as 9 pm.,https://en.wikipedia.org/wiki/Somali_cuisine
+ESP,Spain,midday,13:00,15:00,20:30,22:00,14.0,21.25,104.2,12.26,19.51,0,"Lunch, 1 to 3 pm, is effectively dinner; supper begins 8.30 to 10 pm.",https://en.wikipedia.org/wiki/Lunch
+SWE,Sweden,evening,11:30,12:00,18:00,19:00,11.75,18.5,32.1,11.22,17.97,0,A light lunch before noon and a heavy dinner around 6 or 7 pm.,https://en.wikipedia.org/wiki/Swedish_cuisine
+GBR,United Kingdom,evening,,,19:48,19:48,,19.8,41.1,,19.11,0,Average evening meal time 7.47 pm (a survey cited by Wikipedia); Sunday lunch is the big meal of the week.,https://en.wikipedia.org/wiki/Dinner
+USA,United States of America,evening,11:00,13:00,17:06,20:18,12.0,18.7,49.8,11.17,17.87,0,Dinner peaks at 6.19 pm; most households eat between 5.07 and 8.19 pm.,https://en.wikipedia.org/wiki/Dinner
+VEN,Venezuela,midday,,,,,,,31.7,,,0,A large dinner around noon and a very light supper.,https://en.wikipedia.org/wiki/Venezuelan_cuisine
+YEM,Yemen,midday,,,,,,,2.3,,,0,"Lunch is the main meal of the day, not dinner.",https://en.wikipedia.org/wiki/Yemeni_cuisine
+AUS,Australia,,12:00,14:00,,,13.0,,26.1,12.56,,0,Lunch between noon and 2 pm.,https://en.wikipedia.org/wiki/Lunch
+SAU,Saudi Arabia,midday,13:00,16:00,,,14.5,,5.4,14.41,,1,"Regional statement: in most Arab countries lunch, 1 to 4 pm, is the main meal.",https://en.wikipedia.org/wiki/Lunch
+ARE,United Arab Emirates,midday,13:00,16:00,,,14.5,,18.6,14.19,,1,"Regional statement: in most Arab countries lunch, 1 to 4 pm, is the main meal.",https://en.wikipedia.org/wiki/Lunch
+KWT,Kuwait,midday,13:00,16:00,,,14.5,,-11.8,14.7,,1,"Regional statement: in most Arab countries lunch, 1 to 4 pm, is the main meal.",https://en.wikipedia.org/wiki/Lunch
+QAT,Qatar,midday,13:00,16:00,,,14.5,,-25.9,14.93,,1,"Regional statement: in most Arab countries lunch, 1 to 4 pm, is the main meal.",https://en.wikipedia.org/wiki/Lunch
+BHR,Bahrain,midday,13:00,16:00,,,14.5,,-22.1,14.87,,1,"Regional statement: in most Arab countries lunch, 1 to 4 pm, is the main meal.",https://en.wikipedia.org/wiki/Lunch
+JOR,Jordan,midday,13:00,16:00,,,14.5,,36.4,13.89,,1,"Regional statement: in most Arab countries lunch, 1 to 4 pm, is the main meal.",https://en.wikipedia.org/wiki/Lunch
+LBN,Lebanon,midday,13:00,16:00,,,14.5,,12.3,14.29,,1,"Regional statement: in most Arab countries lunch, 1 to 4 pm, is the main meal.",https://en.wikipedia.org/wiki/Lunch
+SYR,Syria,midday,13:00,16:00,,,14.5,,31.2,13.98,,1,"Regional statement: in most Arab countries lunch, 1 to 4 pm, is the main meal.",https://en.wikipedia.org/wiki/Lunch
+IRQ,Iraq,midday,13:00,16:00,,,14.5,,1.6,14.47,,1,"Regional statement: in most Arab countries lunch, 1 to 4 pm, is the main meal.",https://en.wikipedia.org/wiki/Lunch

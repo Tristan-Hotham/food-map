@@ -1,0 +1,959 @@
+{
+ "meta": {
+  "retrieved": "29 October 2026",
+  "doi": "10.5281/zenodo.23761260",
+  "n_cuisine_articles": 770,
+  "n_cuisine_cats": 524,
+  "n_famfix": 194,
+  "n_mentions_all": 510
+ },
+ "national": {
+  "n_countries": 186,
+  "n_mentions": 460,
+  "n_distinct": 396,
+  "n_parts": 14,
+  "median_per_country": 2.0,
+  "max_country": "France",
+  "max_n": 13,
+  "n_one": 90,
+  "family_first": [
+   {
+    "f": "meat",
+    "name": "Meat and grills",
+    "n": 42,
+    "share": 0.22580645161290322
+   },
+   {
+    "f": "porridge",
+    "name": "Starchy staples: porridges, grains, potatoes",
+    "n": 29,
+    "share": 0.15591397849462366
+   },
+   {
+    "f": "soups",
+    "name": "Soups, stews and curries",
+    "n": 27,
+    "share": 0.14516129032258066
+   },
+   {
+    "f": "rice",
+    "name": "Rice dishes",
+    "n": 24,
+    "share": 0.12903225806451613
+   },
+   {
+    "f": "fish",
+    "name": "Fish and seafood",
+    "n": 16,
+    "share": 0.08602150537634409
+   },
+   {
+    "f": "veg",
+    "name": "Beans, vegetables and eggs",
+    "n": 15,
+    "share": 0.08064516129032258
+   },
+   {
+    "f": "bread",
+    "name": "Breads, pancakes and sandwiches",
+    "n": 9,
+    "share": 0.04838709677419355
+   },
+   {
+    "f": "noodles",
+    "name": "Noodles and pasta",
+    "n": 9,
+    "share": 0.04838709677419355
+   },
+   {
+    "f": "dumplings",
+    "name": "Dumplings, pies and pastries",
+    "n": 8,
+    "share": 0.043010752688172046
+   },
+   {
+    "f": "cheese",
+    "name": "Cheese",
+    "n": 3,
+    "share": 0.016129032258064516
+   },
+   {
+    "f": "sweets",
+    "name": "Sweets and desserts",
+    "n": 3,
+    "share": 0.016129032258064516
+   },
+   {
+    "f": "other",
+    "name": "Other",
+    "n": 1,
+    "share": 0.005376344086021506
+   }
+  ],
+  "shared": [
+   {
+    "dish": "Ugali",
+    "n": 6,
+    "countries": [
+     "Kenya",
+     "Lesotho",
+     "Rwanda",
+     "South Africa",
+     "Zambia",
+     "Zimbabwe"
+    ]
+   },
+   {
+    "dish": "Couscous",
+    "n": 4,
+    "countries": [
+     "Algeria",
+     "Libya",
+     "Morocco",
+     "Tunisia"
+    ]
+   },
+   {
+    "dish": "Moambe chicken",
+    "n": 4,
+    "countries": [
+     "Angola",
+     "DR Congo",
+     "Gabon",
+     "Republic of the Congo"
+    ]
+   },
+   {
+    "dish": "Harees",
+    "n": 4,
+    "countries": [
+     "Armenia",
+     "Burundi",
+     "Saudi Arabia",
+     "United Arab Emirates"
+    ]
+   },
+   {
+    "dish": "Kabsa",
+    "n": 4,
+    "countries": [
+     "Bahrain",
+     "Kuwait",
+     "Qatar",
+     "Saudi Arabia"
+    ]
+   },
+   {
+    "dish": "Cou-cou",
+    "n": 3,
+    "countries": [
+     "Antigua and Barbuda",
+     "Barbados",
+     "United States Virgin Islands"
+    ]
+   },
+   {
+    "dish": "Lamb and mutton",
+    "n": 3,
+    "countries": [
+     "Australia",
+     "Iceland",
+     "New Zealand"
+    ]
+   },
+   {
+    "dish": "Dumpling",
+    "n": 3,
+    "countries": [
+     "China",
+     "Czechia",
+     "Slovenia"
+    ]
+   }
+  ],
+  "n_with_photo_first": 146,
+  "photo_share_first": 0.7849462365591398
+ },
+ "regional": {
+  "n_dishes": 2706,
+  "n_regions": 485,
+  "n_countries": 65,
+  "n_wikidata_food": 8363,
+  "share_placed": 0.3235680975726414,
+  "evidence": {
+   "place": 1742,
+   "origin": 91,
+   "cuisine": 173,
+   "cat": 520,
+   "name": 180
+  },
+  "top": [
+   {
+    "k": "IDN:IDN-1224",
+    "name": "Central Java",
+    "country": "Indonesia",
+    "n": 123
+   },
+   {
+    "k": "IDN:IDN-1233",
+    "name": "East Java",
+    "country": "Indonesia",
+    "n": 82
+   },
+   {
+    "k": "IDN:IDN-1223",
+    "name": "West Java",
+    "country": "Indonesia",
+    "n": 67
+   },
+   {
+    "k": "ITA:Emilia-Romagna",
+    "name": "Emilia-Romagna",
+    "country": "Italy",
+    "n": 51
+   },
+   {
+    "k": "CHN:CHN-1180",
+    "name": "Guangdong",
+    "country": "China",
+    "n": 48
+   },
+   {
+    "k": "IDN:IDN-1234",
+    "name": "South Kalimantan",
+    "country": "Indonesia",
+    "n": 45
+   },
+   {
+    "k": "ITA:Campania",
+    "name": "Campania",
+    "country": "Italy",
+    "n": 44
+   },
+   {
+    "k": "ESP:Cataluña",
+    "name": "Catalonia",
+    "country": "Spain",
+    "n": 44
+   },
+   {
+    "k": "JPN:JPN-1847",
+    "name": "Hokkaidō",
+    "country": "Japan",
+    "n": 44
+   },
+   {
+    "k": "JPN:JPN-3502",
+    "name": "Okinawa Prefecture",
+    "country": "Japan",
+    "n": 42
+   },
+   {
+    "k": "ITA:Toscana",
+    "name": "Tuscany",
+    "country": "Italy",
+    "n": 42
+   },
+   {
+    "k": "ESP:Andalucía",
+    "name": "Andalusia",
+    "country": "Spain",
+    "n": 38
+   },
+   {
+    "k": "IDN:IDN-539",
+    "name": "West Sumatra",
+    "country": "Indonesia",
+    "n": 38
+   },
+   {
+    "k": "IDN:IDN-1136",
+    "name": "Aceh",
+    "country": "Indonesia",
+    "n": 36
+   },
+   {
+    "k": "FRA:Auvergne-Rhône-Alpes",
+    "name": "Auvergne-Rhône-Alpes",
+    "country": "France",
+    "n": 34
+   }
+  ],
+  "focus": {
+   "ESP": {
+    "name": "Spain",
+    "dishes": 199,
+    "regions": 19,
+    "regions_with": 17,
+    "top_region": "Catalonia",
+    "top_n": 44,
+    "all_dishes": 339
+   },
+   "ITA": {
+    "name": "Italy",
+    "dishes": 388,
+    "regions": 20,
+    "regions_with": 20,
+    "top_region": "Emilia-Romagna",
+    "top_n": 51,
+    "all_dishes": 892
+   },
+   "FRA": {
+    "name": "France",
+    "dishes": 131,
+    "regions": 18,
+    "regions_with": 13,
+    "top_region": "Auvergne-Rhône-Alpes",
+    "top_n": 34,
+    "all_dishes": 408
+   },
+   "GBR": {
+    "name": "United Kingdom",
+    "dishes": 41,
+    "regions": 12,
+    "regions_with": 10,
+    "top_region": "South West",
+    "top_n": 9,
+    "all_dishes": 251
+   },
+   "IRL": {
+    "name": "Ireland",
+    "dishes": 1,
+    "regions": 34,
+    "regions_with": 1,
+    "top_region": "Cork",
+    "top_n": 1,
+    "all_dishes": 21
+   },
+   "DEU": {
+    "name": "Germany",
+    "dishes": 50,
+    "regions": 16,
+    "regions_with": 11,
+    "top_region": "Bavaria",
+    "top_n": 15,
+    "all_dishes": 173
+   },
+   "MEX": {
+    "name": "Mexico",
+    "dishes": 21,
+    "regions": 33,
+    "regions_with": 11,
+    "top_region": "Nuevo León",
+    "top_n": 5,
+    "all_dishes": 147
+   },
+   "USA": {
+    "name": "United States",
+    "dishes": 178,
+    "regions": 51,
+    "regions_with": 30,
+    "top_region": "New York",
+    "top_n": 26,
+    "all_dishes": 502
+   },
+   "CHN": {
+    "name": "China",
+    "dishes": 149,
+    "regions": 32,
+    "regions_with": 23,
+    "top_region": "Guangdong",
+    "top_n": 48,
+    "all_dishes": 404
+   },
+   "IND": {
+    "name": "India",
+    "dishes": 134,
+    "regions": 36,
+    "regions_with": 16,
+    "top_region": "Kerala",
+    "top_n": 24,
+    "all_dishes": 266
+   },
+   "JPN": {
+    "name": "Japan",
+    "dishes": 505,
+    "regions": 47,
+    "regions_with": 47,
+    "top_region": "Hokkaidō",
+    "top_n": 44,
+    "all_dishes": 981
+   },
+   "TUR": {
+    "name": "Turkey",
+    "dishes": 45,
+    "regions": 81,
+    "regions_with": 27,
+    "top_region": "İzmir",
+    "top_n": 6,
+    "all_dishes": 267
+   },
+   "IDN": {
+    "name": "Indonesia",
+    "dishes": 490,
+    "regions": 33,
+    "regions_with": 31,
+    "top_region": "Central Java",
+    "top_n": 123,
+    "all_dishes": 661
+   },
+   "PRT": {
+    "name": "Portugal",
+    "dishes": 19,
+    "regions": 7,
+    "regions_with": 5,
+    "top_region": "Norte (north)",
+    "top_n": 7,
+    "all_dishes": 119
+   },
+   "BRA": {
+    "name": "Brazil",
+    "dishes": 26,
+    "regions": 27,
+    "regions_with": 12,
+    "top_region": "São Paulo",
+    "top_n": 6,
+    "all_dishes": 105
+   },
+   "KOR": {
+    "name": "South Korea",
+    "dishes": 21,
+    "regions": 17,
+    "regions_with": 11,
+    "top_region": "South Gyeongsang",
+    "top_n": 4,
+    "all_dishes": 243
+   }
+  },
+  "top_countries": [
+   {
+    "iso": "JPN",
+    "name": "Japan",
+    "n": 505
+   },
+   {
+    "iso": "IDN",
+    "name": "Indonesia",
+    "n": 490
+   },
+   {
+    "iso": "ITA",
+    "name": "Italy",
+    "n": 388
+   },
+   {
+    "iso": "ESP",
+    "name": "Spain",
+    "n": 199
+   },
+   {
+    "iso": "USA",
+    "name": "United States",
+    "n": 178
+   },
+   {
+    "iso": "CHN",
+    "name": "China",
+    "n": 149
+   },
+   {
+    "iso": "IND",
+    "name": "India",
+    "n": 134
+   },
+   {
+    "iso": "FRA",
+    "name": "France",
+    "n": 131
+   },
+   {
+    "iso": "NGA",
+    "name": "Nigeria",
+    "n": 60
+   },
+   {
+    "iso": "DEU",
+    "name": "Germany",
+    "n": 50
+   },
+   {
+    "iso": "TUR",
+    "name": "Turkey",
+    "n": 45
+   },
+   {
+    "iso": "GBR",
+    "name": "United Kingdom",
+    "n": 41
+   }
+  ],
+  "examples": {
+   "Fabada asturiana": "Asturias",
+   "paella": "Valencian Community",
+   "crema catalana": "Catalonia",
+   "Cornish pasty": "South West",
+   "Lancashire hotpot": "North West",
+   "Yorkshire pudding": "Yorkshire and the Humber",
+   "Peking duck": "Beijing",
+   "Kung Pao chicken": "Guizhou",
+   "Cochinita pibil": "Yucatán",
+   "Adana kebabı": "Adana",
+   "Weisswurst": "Bavaria",
+   "takoyaki": "Ōsaka Prefecture",
+   "Risotto alla milanese": "Lombardy",
+   "jambalaya": "Louisiana",
+   "Bakewell tart": "East Midlands",
+   "Eccles cake": "North West",
+   "pa amb tomàquet": "Catalonia",
+   "Caldo galego": "Galicia",
+   "gazpacho": "Andalusia"
+  },
+  "uk": [
+   {
+    "name": "South West",
+    "n": 9,
+    "d": [
+     "Stargazy pie",
+     "Bath bun",
+     "Sally Lunn bun",
+     "Bath Oliver",
+     "squab pie",
+     "Cornish pasty"
+    ]
+   },
+   {
+    "name": "Scotland",
+    "n": 6,
+    "d": [
+     "Dundee cake",
+     "Arbroath smokie",
+     "Edinburgh rock",
+     "Scottish Morning Roll",
+     "Strathdon Blue",
+     "stonner kebab"
+    ]
+   },
+   {
+    "name": "North West",
+    "n": 5,
+    "d": [
+     "Eccles cake",
+     "Lancashire hotpot",
+     "Kendal Mint Cake",
+     "Manchester tart",
+     "Chorley cake"
+    ]
+   },
+   {
+    "name": "South East",
+    "n": 4,
+    "d": [
+     "Eton mess",
+     "Banbury cake",
+     "Sussex Pond Pudding",
+     "Banbury cheese"
+    ]
+   },
+   {
+    "name": "Greater London",
+    "n": 4,
+    "d": [
+     "Chelsea bun",
+     "jellied eels",
+     "pie and mash",
+     "Tottenham cake"
+    ]
+   },
+   {
+    "name": "Yorkshire and the Humber",
+    "n": 3,
+    "d": [
+     "Yorkshire pudding",
+     "Pontefract cake",
+     "Yorkshire Christmas pie"
+    ]
+   },
+   {
+    "name": "Wales",
+    "n": 3,
+    "d": [
+     "Welsh rarebit",
+     "Welsh cake",
+     "Welsh breakfast"
+    ]
+   },
+   {
+    "name": "East Midlands",
+    "n": 3,
+    "d": [
+     "Bakewell tart",
+     "Bakewell pudding",
+     "Melton Mowbray pork pie"
+    ]
+   },
+   {
+    "name": "West Midlands",
+    "n": 2,
+    "d": [
+     "Staffordshire oatcake",
+     "Coventry Godcakes"
+    ]
+   },
+   {
+    "name": "Northern Ireland",
+    "n": 2,
+    "d": [
+     "Ulster fry",
+     "Christmas chips"
+    ]
+   }
+  ],
+  "spain": [
+   {
+    "name": "Catalonia",
+    "n": 44,
+    "d": [
+     "crema catalana",
+     "pa amb tomàquet",
+     "Arròs negre",
+     "fuet",
+     "Escalivada",
+     "escudella"
+    ]
+   },
+   {
+    "name": "Andalusia",
+    "n": 38,
+    "d": [
+     "gazpacho",
+     "Pastilla",
+     "salmorejo",
+     "alfajor",
+     "ajoblanco",
+     "chicharrón"
+    ]
+   },
+   {
+    "name": "Castile and León",
+    "n": 26,
+    "d": [
+     "Mantecadas de Astorga",
+     "Yemas de Santa Teresa",
+     "Cuchifritos",
+     "hornazo",
+     "Picadillo de chorizo",
+     "Chuletón de Ávila"
+    ]
+   },
+   {
+    "name": "Valencian Community",
+    "n": 16,
+    "d": [
+     "paella",
+     "Arròs negre",
+     "Puchero",
+     "fideuà",
+     "fartons",
+     "Esgarrat"
+    ]
+   },
+   {
+    "name": "Galicia",
+    "n": 16,
+    "d": [
+     "churrasco",
+     "polbo á feira",
+     "Tarta de Santiago",
+     "Arzúa-Ulloa cheese",
+     "Caldo galego",
+     "Filloas"
+    ]
+   },
+   {
+    "name": "Castilla-La Mancha",
+    "n": 14,
+    "d": [
+     "Miguelitos",
+     "Pisto",
+     "carcamusa",
+     "Alajú",
+     "mazapán de Toledo",
+     "Atascaburras"
+    ]
+   },
+   {
+    "name": "Murcia",
+    "n": 13,
+    "d": [
+     "Paparajotes",
+     "gachamiga",
+     "michirones",
+     "alfajor",
+     "caldero",
+     "San Antón rolls"
+    ]
+   },
+   {
+    "name": "Aragon",
+    "n": 8,
+    "d": [
+     "Chistorra",
+     "Tronchon",
+     "Pan de cañada",
+     "Bisalto",
+     "Frutas de Aragón",
+     "Crespillos"
+    ]
+   },
+   {
+    "name": "Cantabria",
+    "n": 7,
+    "d": [
+     "Tuna pot",
+     "leche frita",
+     "Sobao",
+     "Cocido Montañés",
+     "Quesada Pasiega",
+     "Cocido lebaniego"
+    ]
+   },
+   {
+    "name": "Canary Islands",
+    "n": 6,
+    "d": [
+     "Gofio",
+     "Canarian wrinkly potatoes",
+     "ropa vieja",
+     "Majorero cheese PDO",
+     "Conejo en salmorejo",
+     "Queso herreño"
+    ]
+   },
+   {
+    "name": "Balearic Islands",
+    "n": 5,
+    "d": [
+     "Ensaïmada",
+     "Tombet",
+     "Crespells",
+     "Pastissets menorquins",
+     "frit mallorquí"
+    ]
+   },
+   {
+    "name": "Basque Country",
+    "n": 5,
+    "d": [
+     "gâteau Basque",
+     "Basque-style cheesecake",
+     "Gilda",
+     "Blood Sausage from Beasain",
+     "San Blas"
+    ]
+   },
+   {
+    "name": "Madrid",
+    "n": 5,
+    "d": [
+     "Cocido madrileño",
+     "Callos a la madrileña",
+     "Cuchifritos",
+     "Zarajo",
+     "Costrada de Alcalá"
+    ]
+   },
+   {
+    "name": "Extremadura",
+    "n": 4,
+    "d": [
+     "Gazpachos extremeños",
+     "morcilla patatera",
+     "Bolla de chicharrones",
+     "Cabrito de Extremadura"
+    ]
+   },
+   {
+    "name": "Asturias",
+    "n": 3,
+    "d": [
+     "Fabada asturiana",
+     "Tocino de cielo",
+     "Morcilla de Asturias"
+    ]
+   },
+   {
+    "name": "Navarre",
+    "n": 3,
+    "d": [
+     "Chistorra",
+     "Porrusalda",
+     "Chorizo de Pamplona"
+    ]
+   },
+   {
+    "name": "La Rioja",
+    "n": 2,
+    "d": [
+     "Asadurilla",
+     "Sabadeño"
+    ]
+   }
+  ],
+  "regions_with_photo": 428,
+  "n_wikidata_food_all": 19492,
+  "share_top3": 0.5110864745011087
+ },
+ "breakfast": {
+  "n_countries": 73,
+  "styles": [
+   {
+    "s": "bread",
+    "name": "Bread with cheese, cold meats and spreads",
+    "n": 18
+   },
+   {
+    "s": "sweet",
+    "name": "Coffee or tea with bread and something sweet",
+    "n": 12
+   },
+   {
+    "s": "mezze",
+    "name": "Flatbread with beans, cheese, eggs and olives",
+    "n": 11
+   },
+   {
+    "s": "beans",
+    "name": "Eggs, beans, tortillas and plantain",
+    "n": 9
+   },
+   {
+    "s": "rice",
+    "name": "Rice, soup and savoury sides",
+    "n": 7
+   },
+   {
+    "s": "cooked",
+    "name": "Cereal and toast, or a cooked fry-up",
+    "n": 7
+   },
+   {
+    "s": "porridge",
+    "name": "Porridge, congee, buns and fritters",
+    "n": 6
+   },
+   {
+    "s": "southasia",
+    "name": "Flatbreads, rice cakes and curries",
+    "n": 3
+   }
+  ],
+  "wd_breakfast_items": 67,
+  "wd_breakfast_countries": 36,
+  "europe": {
+   "n": 25,
+   "sweet": 5,
+   "bread": 17,
+   "sweet_names": [
+    "France",
+    "Greece",
+    "Italy",
+    "Malta",
+    "Spain"
+   ]
+  }
+ },
+ "main_meal": {
+  "n_coded": 49,
+  "n_named": 40,
+  "counts": {
+   "midday": 34,
+   "shifting": 3,
+   "evening": 11,
+   "morning": 1
+  },
+  "n_times": 34,
+  "wd_lunch_items": 0,
+  "wd_dinner_items": 0,
+  "wd_main_items": 464,
+  "wd_main_countries": 79,
+  "midday_names": [
+   "Albania",
+   "Argentina",
+   "Bolivia",
+   "Bosnia and Herzegovina",
+   "Brazil",
+   "Ecuador",
+   "Egypt",
+   "Greece",
+   "Hungary",
+   "Indonesia",
+   "Latvia",
+   "Mali",
+   "Mexico",
+   "Monaco",
+   "Oman",
+   "Palestine",
+   "Poland",
+   "Portugal",
+   "Romania",
+   "Russia",
+   "Rwanda",
+   "Serbia",
+   "Spain",
+   "Venezuela",
+   "Yemen"
+  ],
+  "evening_names": [
+   "Canada",
+   "Chad",
+   "Denmark",
+   "Finland",
+   "India",
+   "Italy",
+   "New Zealand",
+   "Philippines",
+   "Sweden",
+   "United Kingdom",
+   "United States"
+  ]
+ },
+ "spain": {
+  "lunch_clock": "14:00",
+  "lunch_sun": "12:16",
+  "dinner_clock": "21:15",
+  "dinner_sun": "19:31",
+  "ahead_min": 104.2,
+  "gb_dinner_clock": "19:48",
+  "gb_dinner_sun": "19:07",
+  "gb_ahead_min": 41.1,
+  "us_dinner_clock": "18:42",
+  "us_dinner_sun": "17:52",
+  "gap_clock_min": 87,
+  "gap_sun_min": 24,
+  "lunch_from": "13:00",
+  "lunch_to": "15:00",
+  "dinner_from": "20:30",
+  "dinner_to": "22:00"
+ },
+ "times": {
+  "latest_lunch": "Mexico",
+  "latest_lunch_clock": "15:00",
+  "latest_lunch_sun": "14:24",
+  "latest_sun": [
+   {
+    "name": "Poland",
+    "sun": "14:43"
+   },
+   {
+    "name": "Mexico",
+    "sun": "14:24"
+   }
+  ],
+  "n_lunch": 20,
+  "n_lunch_sun_before_1": 17,
+  "spain_sun_vs_noon_min": 16
+ },
+ "hero": {
+  "countries_any": 188
+ }
+}
