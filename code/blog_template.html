@@ -1,0 +1,150 @@
+<!-- wp:paragraph -->
+<p><em>What does each country eat for breakfast, lunch and dinner? Which dish does it call its own, and which dishes belong to one corner of it, like fabada in Asturias? I built a map of what the world says it eats, and of where the record runs out.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://maps.tristanhotham.com/food-map/">Explore the interactive version</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://doi.org/{{meta.doi|raw}}">Read the paper</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:paragraph -->
+<p>Food is one of the first things anyone wants to know about a place. Is breakfast sweet or savoury? Is the big meal at lunch or in the evening? What is the national dish? And inside a country, which dishes belong to one region and not the next: paella in Valencia, the hotpot in Lancashire, takoyaki in Osaka?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Almost nobody records what people eat as data. What does exist, worldwide, is the encyclopaedia: Wikipedia's lists and articles on national dishes, breakfasts and cuisines, and Wikidata, the open database behind it, which holds tens of thousands of foods with a country, a place, a cuisine or a course attached. The atlas brings those together on one map with four layers: national dishes, breakfast, regional dishes and the main meal of the day.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">National dishes: meat, porridge and stew</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_national_map.png|World map colouring each country by the family of its first-listed national dish: red meat dishes across Russia, China, Australia and Argentina, yellow starchy porridges across much of Africa, orange stews in Brazil and East Africa, purple rice dishes across South Asia and Arabia|Each country coloured by the family of the first dish in Wikipedia's list of national dishes.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Wikipedia's list of national dishes covers {{national.n_countries|int}} countries and territories. It is careful to say it is not definitive: it gathers dishes that someone has called a national dish. The median country has {{national.median_per_country|int}} suggestions; {{national.max_country}} has the most, {{national.max_n|int}}, from escargots to cassoulet.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Colour each country by the family of the first dish listed and a pattern appears. Meat and grills lead ({{national.family_first.0.n|int}} countries): asado, kebabs, schnitzel, Peking duck. Next come starchy staples ({{national.family_first.1.n|int}}), above all the stiff porridges of maize, cassava or plantain that sit at the centre of the plate across Africa: fufu, nshima, sadza, ugali. The maize porridge Wikipedia files under {{national.shared.0.dish}} turns up, under its local names, for {{national.shared.0.n|int}} countries. Then soups, stews and curries ({{national.family_first.2.n|int}}) and rice ({{national.family_first.3.n|int}}), from Central Asia's plov to the Gulf's kabsa.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Breakfast: a sweet south and a savoury north</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_breakfast_map.png|World map of breakfast styles: brown bread-and-cheese breakfasts across northern and central Europe, caramel sweet breakfasts in France, Italy, Spain and Argentina, red cooked breakfasts in Britain, Ireland, North America and Australia, green beans and tortillas in Central America, teal flatbread breakfasts from Turkey to Iran and purple rice breakfasts in East Asia|Breakfast style for the {{breakfast.n_countries|int}} countries described in Wikipedia's 'Breakfast by country'.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Breakfast is the meal Wikipedia describes best, country by country. Sorting its {{breakfast.n_countries|int}} countries into eight styles gives one of the clearest maps in the atlas. Europe splits: {{breakfast.europe.bread|int}} of {{breakfast.europe.n|int}} European countries start the day with bread and something savoury (cheese, cold meats, eggs, liver pâté), while {{breakfast.europe.sweet|int}}, {{breakfast.europe.sweet_names|list}}, are described with coffee and something sweet. Britain and Ireland sit with the United States, Canada, Australia and New Zealand: cereal and toast in the week, the fry-up at weekends. Central America eats eggs, beans, tortillas and plantain. From Turkey to Iran and down the Nile it is flatbread with cheese, olives, eggs and beans. In Japan, Korea, Indonesia and the Philippines breakfast looks like any other meal, built on rice.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Regional dishes: from fabada to takoyaki</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Inside countries the only open record at scale is Wikidata. A dish goes on the map when Wikidata says where it comes from, when its cuisine is a regional cuisine, when its Wikipedia article sits in a regional cuisine category, or when its English name contains the place, as in Bath bun or Fabada asturiana. That places {{regional.n_dishes|int}} of {{regional.n_wikidata_food|int}} foods ({{regional.share_placed|pct}}) in {{regional.n_regions|int}} regions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_spain_regions.png|Map of Spain and Portugal with regions shaded by how many dishes are placed there, darkest in Catalonia, Andalusia and Castile and León, each labelled with two example dishes such as Fabada asturiana in Asturias, paella in the Valencian Community and polbo á feira in Galicia|Spain and Portugal: dishes placed in each region, with two examples.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Spain, where this started, is well covered: {{regional.focus.ESP.dishes|int}} dishes in {{regional.focus.ESP.regions_with|int}} of its {{regional.focus.ESP.regions|int}} regions. Catalonia leads with {{regional.spain.0.n|int}} (crema catalana, pa amb tomàquet, fuet), then Andalusia with {{regional.spain.1.n|int}} (gazpacho, salmorejo). Fabada sits in Asturias, paella in Valencia, polbo á feira and caldo galego in Galicia.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_uk_regions.png|Map of Britain and Ireland with English regions, Scotland, Wales and Northern Ireland shaded by number of dishes, labelled with dishes such as the Cornish pasty, Lancashire hotpot, Eccles cake, Yorkshire pudding and Dundee cake; Ireland almost empty|Britain and Ireland. Most British regional dishes are placed by the town in their name.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Britain is a different story. Its regional dishes carry their towns in their names, so the name rule does most of the work: the Eccles cake, Lancashire hotpot and Kendal mint cake in the North West, Yorkshire pudding and the Pontefract cake, the Bakewell tart, the Cornish pasty and the Bath bun. A dish named after a place was not always first made there, and the map says so.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:pullquote -->
+<figure class="wp-block-pullquote"><blockquote><p>The map fills in where volunteers have catalogued local food, not where food is most regional.</p></blockquote></figure>
+<!-- /wp:pullquote -->
+
+<!-- wp:paragraph -->
+<p>The coverage is very uneven. Japan ({{regional.focus.JPN.dishes|int}} dishes, in every prefecture), Indonesia ({{regional.focus.IDN.dishes|int}}) and Italy ({{regional.focus.ITA.dishes|int}}) together hold {{regional.share_top3|pct}} of all placed dishes. Mexico has {{regional.focus.MEX.dishes|int}}, Turkey {{regional.focus.TUR.dishes|int}} and Ireland {{regional.focus.IRL.dishes|int}}. That is a fact about Wikidata, not about Mexican or Irish food.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why there is no lunch map</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>I wanted maps of lunch and of dinner. The record will not support them. Wikidata tags {{main_meal.wd_main_items|int}} foods as a main course and {{breakfast.wd_breakfast_items|int}} as breakfast, but {{main_meal.wd_lunch_items|int}} as lunch and {{main_meal.wd_dinner_items|int}} as dinner: most dishes can be eaten at either. So the atlas asks a question the sources can answer instead: which meal is the main meal?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_main_meal_map.png|World map of the main meal: gold midday main meals across Latin America, southern and eastern Europe, Russia, Egypt, Arabia and Indonesia; dark blue evening main meals in North America, Britain, the Nordic countries, Italy, India and the Philippines; purple for Germany and Austria, shifting from midday to evening|Where Wikipedia's articles say which meal is the main meal.}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Where the articles say, the midday main meal still wins: {{main_meal.counts.midday|int}} of {{main_meal.n_coded|int}} countries, across Latin America, southern and eastern Europe, Russia, the Middle East and Indonesia. The evening main meal belongs to the English-speaking and Nordic countries, India, the Philippines and Italy ({{main_meal.counts.evening|int}}). Germany, Austria and Slovakia are described as moving from one to the other as people began to work further from home.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Spain's late meals are early by the sun</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"sizeSlug":"full"} -->
+<figure class="wp-block-image size-full">{{IMG|b_meal_times.png|Dot chart of lunch and dinner times for 24 countries, hollow dots for clock time and solid dots for sun time; Spain's lunch moves from 14:00 on the clock to 12:16 by the sun and its dinner from 21:15 to 19:31|Middle of the stated lunch and dinner windows, on the clock (hollow) and by the sun (solid).}}</figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Spain is famous for eating late: lunch from {{spain.lunch_from|raw}} to {{spain.lunch_to|raw}}, supper from {{spain.dinner_from|raw}} to {{spain.dinner_to|raw}}. But Spain's clocks run on average {{spain.ahead_min|int}} minutes ahead of the sun, as my <a href="https://maps.tristanhotham.com/clock-vs-sun/">clock versus sun map</a> shows. Take that away and Spain's 2 pm lunch is at {{spain.lunch_sun|raw}} by the sun, a midday meal like everyone else's. Its supper, {{spain.dinner_clock|raw}} on the clock, is {{spain.dinner_sun|raw}} by the sun, just {{spain.gap_sun_min|int}} minutes after Britain's average evening meal by the same measure. On the clock the gap is {{spain.gap_clock_min|int}} minutes. Across the {{times.n_lunch|int}} countries with stated lunch times, {{times.n_lunch_sun_before_1|int}} eat it before 1 pm by the sun.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How I did this</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>All data were gathered on {{meta.retrieved}} from English Wikipedia (the 'National dish', 'Breakfast by country', 'Lunch' and 'Dinner' articles and {{meta.n_cuisine_articles|int}} cuisine articles) and from Wikidata through the QLever endpoint. National dish families come from Wikidata's class tree; breakfast styles and main meals are summaries of the article text, coded only where a source says something specific. Dishes are placed in Natural Earth states and provinces by point in polygon, and broad areas such as 'Southern United States' never place a dish. Sun time subtracts each country's average lead of clock over sun. The paper sets out every rule and caveat. This is an atlas of what the open record says, not a survey of what people eat.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://maps.tristanhotham.com/food-map/">Explore the interactive version</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://doi.org/{{meta.doi|raw}}">Read the paper</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://github.com/Tristan-Hotham/food-map">Data and code</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Notes and sources</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>English Wikipedia: <a href="https://en.wikipedia.org/wiki/National_dish">National dish</a>, <a href="https://en.wikipedia.org/wiki/Breakfast_by_country">Breakfast by country</a>, <a href="https://en.wikipedia.org/wiki/Lunch">Lunch</a>, <a href="https://en.wikipedia.org/wiki/Dinner">Dinner</a> and the cuisine articles and categories (CC BY-SA 4.0)</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="https://www.wikidata.org/">Wikidata</a> food items, places and cuisines (CC0), via <a href="https://qlever.cs.uni-freiburg.de/">QLever</a>; dish photos on the interactive page from <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>, each credited with its licence</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="https://www.naturalearthdata.com/">Natural Earth</a> countries and states and provinces (public domain); <a href="https://www.geonames.org/">GeoNames</a> (CC BY 4.0) and OS Open Names (OGL v3.0) for place names inside dish names</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Clock and sun offsets from <a href="https://maps.tristanhotham.com/clock-vs-sun/">How wrong is your clock?</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->

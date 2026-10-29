@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>What Does the World Eat?</title>
+<meta name="description" content="An atlas of national dishes, breakfasts, regional dishes and the main meal of the day: {{national.n_countries|int}} countries and territories, {{regional.n_dishes|int}} dishes placed in {{regional.n_regions|int}} regions, from Wikipedia and Wikidata.">
+<meta property="og:title" content="What does the world eat? National dishes, breakfasts and regional food on one map">
+<meta property="og:description" content="National dishes for {{national.n_countries|int}} countries and territories, breakfast styles for {{breakfast.n_countries|int}}, and {{regional.n_dishes|int}} regional dishes from fabada in Asturias to takoyaki in Osaka.">
+<meta property="og:image" content="https://maps.tristanhotham.com/food-map/header.png">
+<meta property="og:url" content="https://maps.tristanhotham.com/food-map/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* Kitchen table: cream cloth, tomato red, olive green, saffron. Family and style colours are set in the script. */
+:root{
+  --bg:#FAF5EC; --panel:#F1E9DA; --fg:#24201B; --muted:#6E665A; --rule:#E4DACA; --card:#FFFCF6; --border:#D3C7B3;
+  --hot:#C2412D; --cool:#5E7A2E; --gold:#D99A1E; --land:#ECE4D6; --sea:#F4F0E8;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17161A; --panel:#222026; --fg:#EFEAE2; --muted:#A9A2AC; --rule:#38343D; --card:#1F1D23; --border:#4A4450;
+  --hot:#EA7A62; --cool:#A9C46F; --gold:#F0BC4E; --land:#2B2830; --sea:#1C1A1F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17161A; --panel:#222026; --fg:#EFEAE2; --muted:#A9A2AC; --rule:#38343D; --card:#1F1D23; --border:#4A4450;
+  --hot:#EA7A62; --cool:#A9C46F; --gold:#F0BC4E; --land:#2B2830; --sea:#1C1A1F; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:700px;margin:0 auto;padding-block:28px 64px}
+.wrap .bleed{width:min(1180px,calc(100vw - 32px));margin-left:calc((100% - min(1180px,100vw - 32px))/2);margin-right:0}
+a{color:inherit;text-decoration-color:var(--hot);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:var(--hot);color:#fff;padding:5px 8px;font-weight:500}
+header.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:end;border-bottom:6px double var(--fg);padding-bottom:22px;margin-top:18px}
+h1{font:900 clamp(44px,11vw,96px)/.9 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1 .a{color:var(--hot)} h1 .b{color:var(--cool)}
+.mark{width:clamp(84px,18vw,140px);height:auto;display:block}
+.dek{grid-column:1/-1;font-size:21px;line-height:1.42;margin:8px 0 0;max-width:52ch}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:54px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--hot);display:block;letter-spacing:.1em;margin-bottom:10px}
+h3{font:600 20px/1.25 var(--display);margin:28px 0 6px}
+p{margin:0 0 16px}
+.lede::first-letter{font:900 72px/.8 var(--display);float:left;margin:6px 10px 0 0;color:var(--hot)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 8px}
+.stats div{background:var(--card);padding:14px 12px}
+.stats b{display:block;font:900 clamp(22px,4.4vw,32px)/1 var(--display);letter-spacing:-.01em}
+.stats b.h{color:var(--hot)} .stats b.c{color:var(--cool)} .stats b.g{color:var(--gold)}
+.stats span{font:400 12px/1.35 var(--mono);color:var(--muted);display:block;margin-top:6px}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.figure{margin:26px 0 30px}
+.fig-h{font:600 19px/1.25 var(--display);margin:0 0 4px}
+.fig-sub{font:400 13px/1.45 var(--mono);color:var(--muted);margin:0 0 12px}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--mono);fill:var(--fg)}
+.lab{font-size:12px}.lab.m{fill:var(--muted)}.lab.b{font-weight:500}.lab.s{font-size:11px}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font:400 12px/1.45 var(--mono);padding:8px 10px;border-radius:3px;max-width:290px;z-index:1000;transform:translate(-50%,calc(-100% - 12px));display:none}
+.tip b{font-weight:500}
+.controls{display:flex;gap:8px;align-items:center;margin:0 0 10px;flex-wrap:wrap}
+.scrollrow{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:2px;max-width:100%}
+.scrollrow .btn{flex:0 0 auto;white-space:nowrap}
+.ctl-l{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:2px;flex:0 0 auto}
+.btn{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px 10px;cursor:pointer;min-height:36px}
+.btn[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.tabs .btn[aria-pressed="true"]{background:var(--hot);border-color:var(--hot);color:#fff}
+select{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px 6px;min-height:36px;max-width:100%}
+.searchbox{position:relative;flex:1 1 260px;min-width:0}
+input[type=search]{font:400 15px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 11px;min-height:40px;width:100%}
+.suggest{position:absolute;left:0;right:0;top:100%;margin:2px 0 0;padding:0;list-style:none;background:var(--card);border:1px solid var(--border);z-index:1001;font:400 13px/1.3 var(--mono);display:none;max-height:340px;overflow:auto}
+.suggest li{padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--rule)}
+.suggest li span{color:var(--muted)}
+.suggest li[aria-selected="true"],.suggest li:hover{background:var(--panel)}
+.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;align-items:start}
+@media (max-width:900px){.mapgrid{grid-template-columns:1fr}}
+.side{background:var(--card);border:1px solid var(--border);padding:12px 12px 10px;font:400 13px/1.45 var(--mono);max-height:640px;overflow:auto}
+@media (max-width:900px){.side{max-height:none}}
+.side h4{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:12px 0 8px}
+.side h4:first-child{margin-top:2px}
+.side .big{font:800 26px/1.1 var(--display);margin:2px 0 4px}
+.side .sub{color:var(--muted);font-size:12px;margin:0 0 8px}
+.side ol,.side ul{margin:4px 0 8px;padding-left:20px}
+.side li{margin:3px 0}
+.side li small{color:var(--muted)}
+.side figure{margin:6px 0 10px}
+.side figure img{width:100%;height:auto;max-height:220px;object-fit:cover;display:block;border-radius:2px;background:var(--panel)}
+.side figcaption{font-size:10.5px;color:var(--muted);margin-top:3px;line-height:1.35}
+.chip{display:inline-block;font:500 11px/1 var(--mono);padding:4px 7px;border-radius:999px;color:#fff;margin:0 4px 4px 0}
+.ev{display:inline-block;font:400 10px/1 var(--mono);padding:2px 5px;border:1px solid var(--border);border-radius:3px;color:var(--muted);margin-left:4px;vertical-align:1px}
+.go{cursor:pointer;text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:3px}
+.sw{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:6px;vertical-align:-1px;border:1px solid rgba(0,0,0,.15)}
+.lmap{height:620px;border:1px solid var(--border);background:var(--sea);border-radius:2px}
+@media (max-width:600px){.lmap{height:min(62vh,460px)}}
+.leaflet-container{font:400 12px/1.4 var(--mono);background:var(--sea)}
+.lyrBtn{background:var(--card,var(--bg));color:var(--fg);border:1px solid var(--border);border-radius:3px;font:600 12px/1 var(--mono);padding:8px 10px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.lyrBtn[aria-expanded="true"]{background:var(--fg);color:var(--bg)}
+.lyrPanel{background:var(--card,var(--bg));color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 12px 8px;margin-top:6px;width:240px;box-shadow:0 2px 10px rgba(0,0,0,.15);font:400 12px/1.3 var(--mono)}
+.lyrPanel[hidden]{display:none}
+.lyrPanel .row{margin:0 0 9px}
+.lyrPanel label{display:flex;gap:6px;align-items:center;cursor:pointer;font-weight:600}
+.lyrPanel input[type=range]{width:100%;accent-color:var(--fg)}
+.lyrPanel select{font:400 12px var(--mono);background:var(--bg);color:var(--fg);border:1px solid var(--border);border-radius:2px;padding:2px 4px;width:100%;min-height:0}
+.lyrPanel .sub{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:11px;margin-top:3px}
+.lyrPanel .sub span{flex:0 0 58px}
+.lyrPanel .reset{font:400 11px var(--mono);color:var(--muted);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.cityL{font:500 11px/1 var(--mono);color:var(--fg);white-space:nowrap;text-shadow:0 0 3px var(--bg),0 0 3px var(--bg),0 0 2px var(--bg);pointer-events:none}
+.cityL i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--fg);margin-right:4px;vertical-align:1px}
+.cityL.s{font-size:10px;font-weight:400}
+.regL{font:600 10.5px/1.1 var(--mono);color:var(--fg);white-space:nowrap;text-shadow:0 0 3px var(--bg),0 0 3px var(--bg),0 0 2px var(--bg);pointer-events:none;text-align:center}
+.regL small{display:block;font-weight:400;color:var(--muted)}
+.mapnote{background:color-mix(in srgb,var(--card) 92%,transparent);border:1px solid var(--border);border-radius:3px;padding:6px 9px;font:400 12px/1.35 var(--mono);max-width:min(300px,70vw);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.mapnote b{font-weight:600}
+.mapnote:empty{display:none}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--fg);border-radius:3px;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.leaflet-popup-content{font:400 12.5px/1.45 var(--mono);margin:10px 12px}
+.leaflet-bar a,.leaflet-bar a:hover{background:var(--card);color:var(--fg);border-bottom-color:var(--border)}
+.leaflet-control-attribution{background:color-mix(in srgb,var(--card) 85%,transparent)!important;color:var(--muted)}
+.leaflet-control-attribution a{color:var(--fg)}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font:400 12px/1.3 var(--mono);color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center}
+.legend i{display:inline-block;width:13px;height:13px;margin-right:6px;border-radius:2px;border:1px solid rgba(0,0,0,.15)}
+.legend i.h{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.75) 0 2px,transparent 2px 5px)}
+.pull{font:600 26px/1.25 var(--display);border-left:6px solid var(--hot);padding:4px 0 4px 18px;margin:30px 0}
+.note{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;font-size:16px;margin:22px 0}
+.note h3{margin-top:0}
+table.t{width:100%;border-collapse:collapse;font:400 13px/1.35 var(--mono)}
+table.t th{text-align:left;font-weight:500;color:var(--muted);border-bottom:2px solid var(--fg);padding:6px 8px 6px 0}
+table.t td{border-bottom:1px solid var(--rule);padding:7px 8px 7px 0;vertical-align:top}
+table.t td.num,table.t th.num{text-align:right;white-space:nowrap}
+table.t tr.go td{cursor:pointer}
+table.t tr.go:hover td{background:var(--panel)}
+.tablewrap{overflow-x:auto}
+@media (max-width:600px){table.t .wide{display:none}}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}
+@media (max-width:600px){.cards{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-left:8px solid var(--hot);padding:12px 14px;font:400 13px/1.5 var(--mono)}
+.card b{font:600 19px/1.2 var(--display);display:block;margin-bottom:2px}
+.card .big{font:900 28px/1.05 var(--display);margin:6px 0 2px}
+.card .big span{color:var(--muted);font:400 13px/1 var(--mono)}
+.card button{margin-top:8px}
+details{margin:14px 0}
+summary{font:500 13px/1.4 var(--mono);cursor:pointer;color:var(--fg);padding:8px 0}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.cta a{font:500 13px/1 var(--mono);text-decoration:none;border:1px solid var(--fg);padding:11px 14px;border-radius:3px}
+.cta a.p{background:var(--hot);border-color:var(--hot);color:#fff}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 13px/1.55 var(--mono);color:var(--muted)}
+footer p{margin:0 0 10px}
+.theme{position:fixed;right:12px;bottom:12px;z-index:1002}
+@media print{.theme,.controls{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="kicker"><b>Data study</b><span>Food</span><span>World, 2026</span></div>
+<header class="hero">
+  <h1>What does the <span class="a">world</span> <span class="b">eat</span>?</h1>
+  <svg class="mark" viewBox="0 0 140 140" aria-hidden="true"><g id="heroMark"></g></svg>
+  <p class="dek">National dishes, breakfasts and the dishes that belong to one valley, province or port: fabada in Asturias, Cornish pasties in Cornwall, takoyaki in Osaka. One map of what the world says it eats, built from Wikipedia and Wikidata, with honest gaps where the record is thin.</p>
+</header>
+<div class="byline">Dr Tristan Hotham, Independent researcher · 2026 · Data: English Wikipedia; Wikidata; Wikimedia Commons; Natural Earth</div>
+
+<div class="stats">
+  <div><b class="h">{{national.n_countries|int}}</b><span>countries and territories with suggested national dishes</span></div>
+  <div><b class="c">{{regional.n_dishes|int}}</b><span>dishes placed in {{regional.n_regions|int}} regions of {{regional.n_countries|int}} countries</span></div>
+  <div><b class="g">{{breakfast.n_countries|int}}</b><span>countries with a described breakfast</span></div>
+  <div><b>{{spain.lunch_sun|raw}}</b><span>Spain's 2 pm lunch, in sun time</span></div>
+</div>
+
+<p class="lede">What does each country eat for breakfast? What about lunch and dinner, and which dish does each country hold up as its own? And can we go further than countries, to the dishes that belong to one region: fabada in Asturias, paella in Valencia, the hotpot in Lancashire? I tried to answer all of that on one map. The answer turned out to be part atlas and part lesson in what the open record knows and does not know about food.</p>
+<p>The map below has four layers. <b>National dishes</b> come from Wikipedia's long list of dishes suggested as national dishes, which covers {{national.n_countries|int}} countries and territories. <b>Breakfast</b> comes from Wikipedia's article on breakfast around the world, which describes {{breakfast.n_countries|int}} countries, each sorted here into one of eight styles. <b>Regional dishes</b> uses Wikidata, the open database behind Wikipedia, which records where {{regional.n_dishes|int}} dishes come from inside a country. <b>Main meal</b> shows where the text says the main meal is eaten at midday and where in the evening. Zoom in on a country to see its regions, or search for a dish.</p>
+
+<h2><span class="n">01 · The atlas</span>The world's plates on one map</h2>
+<div class="bleed" id="atlas">
+<div class="controls" role="group" aria-label="Map layer">
+  <div class="scrollrow tabs" id="layerTabs"><span class="ctl-l">Layer</span><button class="btn" data-l="nat" aria-pressed="true">National dishes</button><button class="btn" data-l="brk">Breakfast</button><button class="btn" data-l="reg">Regional dishes</button><button class="btn" data-l="meal">Main meal</button></div>
+</div>
+<div class="controls">
+  <div class="searchbox"><input type="search" id="q" placeholder="Search a country, region or dish" aria-label="Search a country, region or dish" autocomplete="off"><ul class="suggest" id="sug" role="listbox"></ul></div>
+</div>
+<div class="controls" role="group" aria-label="Zoom to a country">
+  <div class="scrollrow" id="focusRow"><span class="ctl-l">Zoom to</span></div>
+</div>
+<div class="mapgrid">
+  <div><div id="map" class="lmap" role="application" aria-label="World food map"></div>
+    <div class="legend" id="legend"></div></div>
+  <div class="side" id="side" aria-live="polite"></div>
+</div>
+<p class="src" id="mapsrc"></p>
+</div>
+
+<h2><span class="n">02 · National dishes</span>What a country calls its own</h2>
+<p>Wikipedia's list is careful to say it is not definitive: it gathers dishes that someone, somewhere, has called a national dish. That makes it a good mirror of what is claimed rather than what is eaten. Countries have a median of {{national.median_per_country|int}} suggestions; {{national.n_one|int}} have just one, and {{national.max_country}} has the most, {{national.max_n|int}}. The first dish listed for each country is sorted into a dozen families using Wikidata's classes, with a few assigned from the dish's description.</p>
+<div class="figure"><p class="fig-h">The first-listed national dish, by family</p><p class="fig-sub">Share of {{national.n_countries|int}} countries and territories. Hover a bar for examples.</p><div class="chart" id="famChart"></div></div>
+<p>Meat and grills lead, with {{national.family_first.0.n|int}} countries ({{national.family_first.0.share|pct}}): asado, kebabs, schnitzel, Peking duck. Next come starchy staples ({{national.family_first.1.n|int}}), the stiff porridges of maize, cassava or plantain at the centre of the plate across much of Africa (fufu, nshima, sadza, ugali) along with Romania's mămăligă and Belgium's frites. Soups, stews and curries come third ({{national.family_first.2.n|int}}) and rice dishes fourth ({{national.family_first.3.n|int}}), from Central Asia's plov to the Gulf's kabsa and machboos. Some dishes cross borders: the maize porridge that Wikipedia files under {{national.shared.0.dish}} is listed, under its local names, for {{national.shared.0.n|int}} countries, and {{national.shared.1.dish}} for {{national.shared.1.n|int}} across North Africa.</p>
+
+<h2><span class="n">03 · Breakfast</span>A sweet south and a savoury north</h2>
+<p>Breakfast is the meal Wikipedia describes best country by country. Each country's section of the article is summarised here and given one of eight styles by the foods it names first. It is a summary of a summary, so the map is a sketch of habits, not a survey. Click a country on the Breakfast layer to see the foods behind its colour.</p>
+<div class="figure"><p class="fig-h">Breakfast styles</p><p class="fig-sub">Number of countries in each style ({{breakfast.n_countries|int}} described).</p><div class="chart" id="brkChart"></div></div>
+<p>Europe splits neatly. Of the {{breakfast.europe.n|int}} European countries described, {{breakfast.europe.bread|int}} start with bread and something savoury: cheese, cold meats, eggs, liver pâté, open sandwiches. Just {{breakfast.europe.sweet|int}} ({{breakfast.europe.sweet_names|list}}) are described with coffee and something sweet: a croissant, a cornetto, biscuits or toast with jam. Britain and Ireland sit with the United States, Canada, Australia and New Zealand in a style of their own: cereal and toast in the week, the cooked breakfast at weekends. Across Central America the morning plate is eggs, beans, tortillas and plantain; from Turkey to Iran and down the Nile it is flatbread with cheese, olives, eggs and beans; in Japan, Korea, Indonesia and the Philippines breakfast looks like any other meal, built on rice.</p>
+<button class="btn" data-show="brk">Show breakfast on the map</button>
+
+<h2><span class="n">04 · Regional dishes</span>From fabada in Asturias to takoyaki in Osaka</h2>
+<p>Inside countries, Wikidata is the only open record that ties dishes to places at scale. A dish is placed in a region when Wikidata says where it comes from or where it is located (most of them), when its cuisine is a regional cuisine, when its Wikipedia article is filed in a regional cuisine category, or, last, when its English name contains the place (Bath bun, Lancashire hotpot, Fabada asturiana). In all, {{regional.n_dishes|int}} of the {{regional.n_wikidata_food|int}} Wikidata foods with a country ({{regional.share_placed|pct}}) can be placed in one of {{regional.n_regions|int}} regions.</p>
+<div class="cards" id="focusCards"></div>
+<p>The coverage is lumpy, and the lumps say more about Wikidata's volunteers than about food. Japan ({{regional.focus.JPN.dishes|int}} dishes, every one of its {{regional.focus.JPN.regions|int}} prefectures), Indonesia ({{regional.focus.IDN.dishes|int}}) and Italy ({{regional.focus.ITA.dishes|int}}) are rich because people there have catalogued local foods province by province. The top region on the whole map is {{regional.top.0.name}} in {{regional.top.0.country}}, with {{regional.top.0.n|int}}. Mexico ({{regional.focus.MEX.dishes|int}}), Turkey ({{regional.focus.TUR.dishes|int}}) and Ireland ({{regional.focus.IRL.dishes|int}}) are thin, not because their food is less regional but because fewer dishes have a recorded home.</p>
+<div class="figure"><p class="fig-h">Dishes with a recorded region, by country</p><p class="fig-sub">The {{regional.top_countries|len}} countries with the most placed dishes. Bars: dishes; label: regions with at least one.</p><div class="chart" id="regChart"></div></div>
+<h3>Spain, region by region</h3>
+<p>Spain is where the question started, with fabada, the bean and pork stew of {{regional.examples.Fabada asturiana}}. Wikidata places {{regional.focus.ESP.dishes|int}} Spanish dishes in {{regional.focus.ESP.regions_with|int}} of its {{regional.focus.ESP.regions|int}} regions. {{regional.spain.0.name}} leads with {{regional.spain.0.n|int}} (crema catalana, pa amb tomàquet, fuet), then {{regional.spain.1.name}} ({{regional.spain.1.n|int}}, from gazpacho to salmorejo) and {{regional.spain.2.name}} ({{regional.spain.2.n|int}}). Paella sits in the {{regional.examples.paella}}; caldo galego and the octopus dish polbo á feira in Galicia.</p>
+<h3>Britain, by name and by place</h3>
+<p>Britain's regional dishes are mostly named after their towns, so the name rule matters most here: {{regional.focus.GBR.dishes|int}} British dishes are placed, led by the {{regional.uk.0.name}} ({{regional.uk.0.n|int}}: Bath buns, stargazy pie, the Cornish pasty) and {{regional.uk.1.name}} ({{regional.uk.1.n|int}}: Dundee cake, Arbroath smokies, Edinburgh rock). The North West has the Eccles cake, Lancashire hotpot and Kendal mint cake; Yorkshire its pudding and the Pontefract cake. These are the dishes named after a place, which is not always where they were first made.</p>
+<button class="btn" data-show="reg" data-focus="ESP">Show Spain's regions on the map</button> <button class="btn" data-show="reg" data-focus="GBR">Show Britain</button>
+
+<h2><span class="n">05 · Lunch, dinner and the main meal</span>Why there is no lunch map</h2>
+<p>I wanted a map of what each country eats for lunch and another for dinner. The open data will not support them. Wikidata records a 'course' for some dishes, and it is a useful test: {{breakfast.wd_breakfast_items|int}} dishes are tagged as breakfast and {{main_meal.wd_main_items|int}} as a main course, across {{main_meal.wd_main_countries|int}} countries, but {{main_meal.wd_lunch_items|int}} are tagged as lunch and {{main_meal.wd_dinner_items|int}} as dinner. Most dishes in most places can be eaten at either meal. So instead of lunch and dinner maps, the atlas offers two things the record does hold: the national and regional dishes above, which are mostly main dishes, and the question of <b>which meal is the main meal</b>.</p>
+<div class="figure"><p class="fig-h">Wikidata dishes tagged by course</p><p class="fig-sub">Count of food items whose 'course' is each meal.</p><div class="chart" id="courseChart"></div></div>
+<p>The cuisine articles and the articles on lunch and dinner state the main meal for {{main_meal.n_named|int}} countries, plus a regional statement covering most Arab countries. In {{main_meal.counts.midday|int}} of the {{main_meal.n_coded|int}} coded countries the main meal is at midday: Spain, Portugal, Greece, Mexico, Brazil, Argentina, Poland, Russia, Egypt, Indonesia and more. In {{main_meal.counts.evening|int}} it is in the evening, including Britain, the United States, Canada, Sweden, Finland, India and Italy (where lunch is a full meal but lighter than supper). In Germany, Austria and Slovakia the sources describe a shift from a midday main meal to an evening one as working days moved away from home.</p>
+<button class="btn" data-show="meal">Show the main meal on the map</button>
+
+<h3>Spain's late meals are early by the sun</h3>
+<p>Spain's lunch runs from {{spain.lunch_from|raw}} to {{spain.lunch_to|raw}} and supper from {{spain.dinner_from|raw}} to {{spain.dinner_to|raw}}. That looks late, until you remember that Spain's clocks run, on average across the year and the population, {{spain.ahead_min|int}} minutes ahead of the sun (see <a href="https://maps.tristanhotham.com/clock-vs-sun/">How wrong is your clock?</a>). Set by the sun, Spain's 2 pm lunch is at {{spain.lunch_sun|raw}}, {{times.spain_sun_vs_noon_min|int}} minutes after solar noon. Its supper, at {{spain.dinner_clock|raw}} on the clock, is at {{spain.dinner_sun|raw}} by the sun, only {{spain.gap_sun_min|int}} minutes after Britain's average evening meal ({{spain.gb_dinner_sun|raw}} by the sun, {{spain.gb_dinner_clock|raw}} on the clock). On the clock the gap is {{spain.gap_clock_min|int}} minutes.</p>
+<div class="figure"><p class="fig-h">Meal times on the clock and by the sun</p><p class="fig-sub">Middle of the stated lunch and dinner windows. Hollow: clock time. Solid: sun time (clock minus the country's average lead over the sun). {{times.n_lunch|int}} countries with lunch times.</p><div class="chart" id="timeChart"></div></div>
+<p>By the sun, lunch clusters around midday almost everywhere: {{times.n_lunch_sun_before_1|int}} of the {{times.n_lunch|int}} countries with a stated lunch time eat it before 1 pm sun time. The latest by the sun are {{times.latest_sun.0.name}} ({{times.latest_sun.0.sun|raw}}) and {{times.latest_sun.1.name}} ({{times.latest_sun.1.sun|raw}}), where lunch, the main meal, runs into the afternoon on the clock as well.</p>
+
+<h2><span class="n">06 · How I did this</span>Methods and caveats</h2>
+<p><b>National dishes.</b> The data come from the 'By country' section of the English Wikipedia article 'National dish' (retrieved {{meta.retrieved}}): each line gives a country and the dishes suggested for it, and indented lines give parts of a country (England, Scotland, Asturias, Hawaii). Linked dishes were matched to Wikidata through the Wikipedia API, following redirects. Families come from Wikidata's 'subclass of' tree (rice dish, soup, stew, porridge and so on); for the few dishes the tree does not reach, the family is assigned from the dish's description. Photos are each dish's lead image on Wikipedia or Wikidata, shown only when Wikimedia Commons gives a free licence, with the author and licence under each one.</p>
+<p><b>Breakfast.</b> One style per country from the article 'Breakfast by country'. The style and the short list of foods summarise each section. The article covers {{breakfast.n_countries|int}} countries; others are left blank rather than guessed.</p>
+<p><b>Regional dishes.</b> The study takes every Wikidata item that is a dish, bread, cheese, sausage, pastry or dessert, leaves out brands, products, museum objects and fictional foods, and keeps {{regional.n_wikidata_food|int}} with a country of origin. Evidence for a region, strongest first: a place in the item's 'indigenous to', 'location', 'located in', 'location of creation' or 'place of origin' ({{regional.evidence.place|int}} dishes); a sub-national 'country of origin' ({{regional.evidence.origin|int}}); a regional 'cuisine' ({{regional.evidence.cuisine|int}}); membership of a Wikipedia regional cuisine category ({{regional.evidence.cat|int}}); and a place named in the dish's English name ({{regional.evidence.name|int}}). Broad areas (continents, 'Southern United States', historical regions, peoples) never place a dish. Places become regions by point in polygon, using Natural Earth's states and provinces (merged into regions for Spain, Italy, France, Portugal and England). Dishes in a category must share the region's country; a few loose matches remain, and I would rather show them than hide the rule.</p>
+<p><b>Main meal and times.</b> Coded only where a sentence says which meal is the main or largest, or gives times. Sun time subtracts the country's population-weighted average lead of the clock over the sun, daylight saving included, from my clock-vs-sun study.</p>
+<div class="note"><h3>Caveats</h3><p>This is an atlas of what the open record says, not of what people eat every day. Wikipedia's lists are written by volunteers and lean towards English-language sources. Wikidata is far richer for Japan, Indonesia and Italy than for Mexico, Turkey, Ireland or most of Africa. 'Named after' a place does not mean invented there. Breakfast and meal times are summaries of short texts, not surveys. All counts are for {{meta.retrieved}}.</p></div>
+
+<div class="cta"><a class="p" href="https://doi.org/{{meta.doi|raw}}">Read the paper</a><a href="https://github.com/Tristan-Hotham/food-map">Data and code</a><a href="https://blog.tristanhotham.com/2026/10/29/food-map/">Blog post</a></div>
+
+<h3>Sources and licences</h3>
+<ul style="font-size:15px">
+<li>English Wikipedia: <a href="https://en.wikipedia.org/wiki/National_dish">National dish</a>, <a href="https://en.wikipedia.org/wiki/Breakfast_by_country">Breakfast by country</a>, <a href="https://en.wikipedia.org/wiki/Lunch">Lunch</a>, <a href="https://en.wikipedia.org/wiki/Dinner">Dinner</a>, and the 'cuisine of' articles and categories. CC BY-SA 4.0.</li>
+<li>Wikidata via <a href="https://qlever.cs.uni-freiburg.de/wikidata">QLever</a>: dishes, places, cuisines and courses. CC0.</li>
+<li>Wikimedia Commons: dish photos, each credited with its own licence.</li>
+<li>Natural Earth: countries (1:50m) and states and provinces (1:10m). Public domain.</li>
+<li>GeoNames city names (CC BY 4.0) and OS Open Names (OGL v3, contains OS data © Crown copyright and database right 2026) for place names inside dish names.</li>
+<li>Clock and sun offsets: <a href="https://maps.tristanhotham.com/clock-vs-sun/">How wrong is your clock?</a> (timezone-boundary-builder, ODbL).</li>
+<li>Base map tiles © Esri.</li>
+</ul>
+
+<footer>
+  <p>Dr Tristan Hotham, Independent researcher. ORCID 0000-0003-4931-9349. Cite as: Hotham, T. (2026) What does the world eat? National dishes, breakfasts, regional dishes and the main meal of the day from Wikipedia and Wikidata. https://doi.org/{{meta.doi|raw}}</p>
+  <p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
+  <p>Text and figures: CC BY-SA 4.0. Code: MIT. Derived data: CC BY-SA 4.0, with the credits above. Other studies: <a href="https://maps.tristanhotham.com/clock-vs-sun/">How wrong is your clock?</a>, <a href="https://maps.tristanhotham.com/takeaways/">Takeaways</a>, <a href="https://maps.tristanhotham.com/bread-rolls/">Bread rolls</a>, <a href="https://blog.tristanhotham.com/">all posts</a>.</p>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+<button class="btn theme" id="theme" aria-label="Toggle dark mode">◐</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const R = /*RESULTS*/;
+const SITE = /*SITE*/;
+const WORLD = /*WORLD*/;
+const CITIES = /*CITIES*/;
+const fmt = n => n == null || n === "" ? "n/a" : Math.round(n).toLocaleString("en-GB");
+const pc = (x, d = 0) => (x * 100).toFixed(d) + "%";
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const tip = document.getElementById("tip");
+function showTip(h, x, y) { tip.innerHTML = h; tip.style.display = "block"; const w = tip.offsetWidth; x = Math.max(w / 2 + 8, Math.min(innerWidth - w / 2 - 8, x)); tip.style.left = x + scrollX + "px"; tip.style.top = y + scrollY + "px"; }
+function hideTip() { tip.style.display = "none"; }
+document.addEventListener("click", hideTip);
+const NS = "http://www.w3.org/2000/svg";
+const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const lbl = (svg, x, y, s, cls = "lab", anchor = "start") => { const t = el("text", { x, y, class: cls, "text-anchor": anchor }, svg); t.textContent = s; return t; };
+const redraws = [];
+function resp(box, render) { let last = 0; const go = force => { const w = Math.max(280, Math.round(box.clientWidth)); if (!force && Math.abs(w - last) < 4) return; last = w; box.innerHTML = ""; render(w, w < 560); }; new ResizeObserver(() => go()).observe(box); go(); redraws.push(() => go(true)); }
+const isDark = () => { const r = document.documentElement; return r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const CN = iso => (SITE.cname[iso] || iso);
+const small = () => innerWidth < 900;
+
+/* colours */
+const FAMC = { meat: "#A8322D", porridge: "#E0AE2E", soups: "#D46A25", rice: "#6B5B95", fish: "#2F6F8F", veg: "#6E9F3F",
+  bread: "#B98B57", noodles: "#3E8E8A", dumplings: "#7E4B30", sweets: "#D06A8E", cheese: "#E9D27E", drinks: "#8A8A8A", other: "#A9A29A" };
+const FAMORDER = ["meat", "porridge", "soups", "rice", "fish", "veg", "bread", "noodles", "dumplings", "sweets", "cheese", "drinks", "other"];
+const STYC = { sweet: "#C77D3A", bread: "#7A5230", cooked: "#A8322D", beans: "#4F7A3A", rice: "#6B5B95", porridge: "#E0AE2E", southasia: "#D9662B", mezze: "#2F7F8F" };
+const MEALC = { midday: "#E09A16", evening: "#2E3F70", shifting: "#8C6BB1", morning: "#F2C979" };
+const MEALN = { midday: "Main meal at midday", evening: "Main meal in the evening", shifting: "Shifting from midday to evening", morning: "Most filling meal in the morning" };
+const EVN = { place: "place", origin: "origin", cuisine: "cuisine", cat: "category", name: "named after" };
+const EVT = { place: "Wikidata gives a place it comes from or is located in", origin: "Wikidata's country of origin is this region",
+  cuisine: "its Wikidata cuisine is this region's cuisine", cat: "its Wikipedia article is in this region's cuisine category", name: "its name contains this place" };
+const BRK = {}; SITE.brk.forEach(b => BRK[b.iso3] = b);
+const MEAL = {}; SITE.main.forEach(m => MEAL[m.iso3] = m);
+const D = SITE.dishes.map(r => ({ n: r[0], q: r[1], f: r[2], e: r[3], r: r[4].split("|"), s: r[5], lat: r[6], lon: r[7], p: r[8], w: r[9], x: r[10] }));
+const byReg = {}; D.forEach(d => d.r.forEach(k => (byReg[k] = byReg[k] || []).push(d)));
+Object.values(byReg).forEach(L => L.sort((a, b) => b.s - a.s));
+const cntPlaced = {}; D.forEach(d => new Set(d.r.map(k => k.split(":")[0])).forEach(i => { const j = i === "HKG" || i === "MAC" ? "CHN" : i; cntPlaced[j] = (cntPlaced[j] || 0) + 1; }));
+const wlink = (w, t) => w ? `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(w.replace(/ /g, "_"))}" target="_blank" rel="noopener">${esc(t)}</a>` : esc(t);
+const photo = ph => ph ? `<figure><img src="${esc(ph.t)}" alt="" loading="lazy"><figcaption>Photo: ${esc(ph.a || "unknown")}, <a href="${esc(ph.u || ph.p)}" target="_blank" rel="noopener">${esc(ph.l)}</a>, via <a href="${esc(ph.p)}" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>` : "";
+
+/* hero mark: a plate whose rim is the share of first-listed national dishes by family */
+(function () {
+  const g = document.getElementById("heroMark"), cx = 70, cy = 70, r = 60, fams = R.national.family_first; let a0 = -Math.PI / 2;
+  const tot = fams.reduce((s, f) => s + f.n, 0);
+  fams.forEach(f => { const a1 = a0 + 2 * Math.PI * f.n / tot, big = a1 - a0 > Math.PI ? 1 : 0;
+    el("path", { d: `M${cx + r * Math.cos(a0)} ${cy + r * Math.sin(a0)} A${r} ${r} 0 ${big} 1 ${cx + r * Math.cos(a1)} ${cy + r * Math.sin(a1)}`, fill: "none", stroke: FAMC[f.f], "stroke-width": 14 }, g); a0 = a1; });
+  el("circle", { cx, cy, r: 44, fill: "none", stroke: "currentColor", "stroke-opacity": .25, "stroke-width": 1.5 }, g);
+  el("path", { d: "M58 44 L58 62 M64 44 L64 62 M70 44 L70 62 M58 62 Q64 70 70 62 M64 68 L64 98", fill: "none", stroke: css("--fg"), "stroke-width": 3, "stroke-linecap": "round" }, g);
+  el("path", { d: "M82 44 C92 54 92 66 82 70 L82 98", fill: "none", stroke: css("--fg"), "stroke-width": 3, "stroke-linecap": "round" }, g);
+})();
+
+/* ---------- map machinery: base tiles, hills, labels, our place names, borders, colour strength ---------- */
+const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/";
+const ESRI_ATT = 'Tiles &copy; Esri, HERE, Garmin, USGS, NGA, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, and the GIS user community';
+const LYDEF = { base: "plain", hills: true, hillK: 55, labels: false, labelK: 80, names: true, nameLvl: 1, borders: true, colour: 85 };
+const LY = { ...LYDEF };
+try { Object.assign(LY, JSON.parse(localStorage.getItem("food_layers") || "{}")); } catch (e) {}
+const saveLY = () => { try { localStorage.setItem("food_layers", JSON.stringify(LY)); } catch (e) {} };
+const map = L.map("map", { minZoom: 1, maxZoom: 11, worldCopyJump: false, maxBounds: [[-75, -200], [86, 200]], zoomSnap: .5, preferCanvas: false }).setView([28, 12], small() ? 1 : 2);
+["hills:250", "fill:400", "regions:410", "labels:450", "pts:600", "names:620"].forEach(s => { const [n, z] = s.split(":"); map.createPane(n); map.getPane(n).style.zIndex = z; });
+["hills", "labels", "names"].forEach(n => map.getPane(n).style.pointerEvents = "none");
+let base = null, hills = null, labels = null; const names = L.layerGroup();
+function setTiles() {
+  [base, labels, hills].forEach(l => { if (l) map.removeLayer(l); });
+  const t = isDark() ? "Dark" : "Light";
+  const url = LY.base === "relief" ? ESRI + "World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}" : LY.base === "satellite" ? ESRI + "World_Imagery/MapServer/tile/{z}/{y}/{x}" : `${ESRI}Canvas/World_${t}_Gray_Base/MapServer/tile/{z}/{y}/{x}`;
+  base = L.tileLayer(url, { maxZoom: 16, maxNativeZoom: LY.base === "relief" ? 13 : 16, attribution: ESRI_ATT }).addTo(map);
+  hills = L.tileLayer(ESRI + "Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}", { maxZoom: 16, maxNativeZoom: 16, pane: "hills" });
+  labels = L.tileLayer(`${ESRI}Canvas/World_${t}_Gray_Reference/MapServer/tile/{z}/{y}/{x}`, { maxZoom: 16, pane: "labels" });
+  applyLayers();
+}
+function applyLayers() {
+  if (!base) return;
+  if (LY.hills) { hills.addTo(map); hills.setOpacity(Math.min(1, .15 + LY.hillK / 120)); } else map.removeLayer(hills);
+  if (LY.labels) { labels.addTo(map); labels.setOpacity(LY.labelK / 100); } else map.removeLayer(labels);
+  if (LY.names) names.addTo(map); else map.removeLayer(names);
+  restyle(); placeNames();
+}
+function placeNames() {
+  names.clearLayers(); if (!LY.names) return;
+  const z = map.getZoom(), bb = map.getBounds().pad(.05);
+  const minPop = [[2, 8e6], [3, 3e6], [4, 1e6], [5, 4e5], [6, 1.5e5], [99, 4e4]].find(([zz]) => z < zz + (LY.nameLvl === 2 ? 1.5 : LY.nameLvl === 0 ? -1 : 0))[1] * (LY.nameLvl === 0 ? 2 : 1);
+  const vis = CITIES.filter(c => c.pop >= minPop && bb.contains([c.lat, c.lon]));
+  const boxes = []; let n = 0;
+  for (const c of vis) {
+    const pt = map.latLngToContainerPoint([c.lat, c.lon]), big = c.pop >= 5e6;
+    const bx = [pt.x - 4, pt.y - 8, pt.x + 10 + c.name.length * (big ? 6.9 : 6.3), pt.y + 7];
+    if (boxes.some(o => bx[0] < o[2] && bx[2] > o[0] && bx[1] < o[3] && bx[3] > o[1])) continue;
+    boxes.push(bx); L.marker([c.lat, c.lon], { pane: "names", interactive: false, keyboard: false, icon: L.divIcon({ className: "cityL" + (big ? "" : " s"), html: `<i></i>${esc(c.name)}`, iconSize: null, iconAnchor: [3, 6] }) }).addTo(names);
+    if (++n >= 140) break;
+  }
+}
+map.on("zoomend moveend", () => { placeNames(); regionsForView(); });
+(function layerControl() {
+  const Ctl = L.Control.extend({ options: { position: "topright" }, onAdd() {
+    const d = L.DomUtil.create("div"); L.DomEvent.disableClickPropagation(d); L.DomEvent.disableScrollPropagation(d);
+    d.innerHTML = `<button class="lyrBtn" aria-expanded="false">Map layers</button>
+<div class="lyrPanel" hidden>
+ <div class="row"><label style="font-weight:600">Base map</label><div class="sub"><select data-k="base" aria-label="Base map"><option value="plain">Plain grey</option><option value="relief">Shaded relief</option><option value="satellite">Satellite</option></select></div></div>
+ <div class="row"><label><input type="checkbox" data-k="hills"> Hills and mountains</label><div class="sub"><span>strength</span><input type="range" data-k="hillK" min="10" max="100" step="5" aria-label="Hill shading strength"></div></div>
+ <div class="row"><label><input type="checkbox" data-k="labels"> Map labels</label><div class="sub"><span>strength</span><input type="range" data-k="labelK" min="20" max="100" step="5" aria-label="Map label strength"></div></div>
+ <div class="row"><label><input type="checkbox" data-k="names"> Bold city names</label><div class="sub"><span>how many</span><select data-k="nameLvl" aria-label="How many city names"><option value="0">Biggest only</option><option value="1">Some</option><option value="2">Lots</option></select></div></div>
+ <div class="row"><label><input type="checkbox" data-k="borders"> Borders</label></div>
+ <div class="row"><label style="font-weight:600">Colour</label><div class="sub"><span>strength</span><input type="range" data-k="colour" min="20" max="100" step="5" aria-label="Colour strength"></div></div>
+ <button class="reset">Reset layers</button>
+</div>`;
+    return d; } });
+  map.addControl(new Ctl());
+  const box = map.getContainer(), btn = box.querySelector(".lyrBtn"), pan = box.querySelector(".lyrPanel");
+  btn.onclick = () => { const o = pan.hidden; pan.hidden = !o; btn.setAttribute("aria-expanded", o); };
+  const sync = () => pan.querySelectorAll("[data-k]").forEach(i => { const k = i.dataset.k; if (i.type === "checkbox") i.checked = LY[k]; else i.value = LY[k]; });
+  pan.querySelectorAll("[data-k]").forEach(i => i.addEventListener(i.type === "range" ? "input" : "change", () => {
+    const k = i.dataset.k; LY[k] = i.type === "checkbox" ? i.checked : (k === "base" ? i.value : +i.value);
+    if (k === "hillK") LY.hills = true; if (k === "labelK") LY.labels = true; if (k === "nameLvl") LY.names = true;
+    sync(); saveLY(); k === "base" ? setTiles() : applyLayers();
+  }));
+  pan.querySelector(".reset").onclick = () => { Object.assign(LY, LYDEF); saveLY(); sync(); setTiles(); };
+  sync();
+})();
+/* a small note inside the map: what is selected (keeps the map useful on a phone, where the panel sits below) */
+const Note = L.Control.extend({ options: { position: innerWidth < 600 ? "topleft" : "bottomleft" }, onAdd() { const d = L.DomUtil.create("div", "mapnote"); d.id = "mapnote"; L.DomEvent.disableClickPropagation(d); return d; } });
+map.addControl(new Note());
+
+/* ---------- state ---------- */
+const S = { layer: "nat", sel: "ESP", reg: null, focus: null };
+const SRC = {
+  nat: "National dishes: English Wikipedia, 'National dish' (not a definitive list). Colour: family of the first dish listed. Photos: Wikimedia Commons, credited in the panel.",
+  brk: "Breakfast: a summary of each country's section in English Wikipedia, 'Breakfast by country'. Blank: not described there.",
+  reg: "Regional dishes: Wikidata (CC0) and English Wikipedia categories, placed in Natural Earth states and provinces. Zoom in or pick a country to see its regions; dots are dishes with a mapped place.",
+  meal: "Main meal: what English Wikipedia's cuisine articles and the 'Lunch' and 'Dinner' articles state. Hatched: the regional statement for most Arab countries. Outline only: times stated, main meal not."
+};
+
+/* ---------- country layer ---------- */
+function hatch(colour) {
+  const svg = map.getPane("fill").querySelector("svg"); if (!svg) return colour;
+  let defs = svg.querySelector("defs"); if (!defs) { defs = el("defs", {}); svg.insertBefore(defs, svg.firstChild); }
+  const pid = "h" + colour.replace("#", "");
+  if (!svg.querySelector("#" + pid)) { const p = el("pattern", { id: pid, patternUnits: "userSpaceOnUse", width: 7, height: 7, patternTransform: "rotate(45)" }, defs); el("rect", { width: 7, height: 7, fill: colour, "fill-opacity": .35 }, p); el("rect", { width: 3.4, height: 7, fill: colour }, p); }
+  return `url(#${pid})`;
+}
+const REGRAMP_L = ["#F6E7CF", "#EFCB9C", "#E5A56C", "#D47A48", "#BB4F31", "#8F2F1F"], REGRAMP_D = ["#3B3330", "#5C4436", "#7E5639", "#A46A3C", "#CB8143", "#EFA24E"];
+const RB = [1, 3, 8, 20, 50, 150];
+const rcol = n => { const ramp = isDark() ? REGRAMP_D : REGRAMP_L; let k = -1; RB.forEach((b, i) => { if (n >= b) k = i; }); return k < 0 ? null : ramp[k]; };
+function cStyle(f) {
+  const iso = f.properties.iso, land = css("--land"), bd = css("--border") || "#999";
+  let fill = null, op = .92, dash = null;
+  if (S.layer === "nat") { const c = SITE.nat[iso]; fill = c ? FAMC[c.f] : null; }
+  else if (S.layer === "brk") { const b = BRK[iso]; fill = b ? STYC[b.style] : null; }
+  else if (S.layer === "meal") { const m = MEAL[iso]; if (m) { if (m.main_meal) fill = m.regional_statement ? hatch(MEALC[m.main_meal]) : MEALC[m.main_meal]; else { fill = land; dash = "3 3"; } } }
+  else if (S.layer === "reg") { const n = cntPlaced[iso] || 0; fill = rcol(n); if (regionsOn && regCountries.has(iso)) { fill = null; op = 0; } }
+  const sel = iso === S.sel && S.layer !== "reg";
+  return { color: sel ? css("--fg") : bd, weight: LY.borders ? (sel ? 2.4 : .6) : (sel ? 2 : 0), dashArray: dash, fillColor: fill || land, fillOpacity: (fill ? op : .5) * LY.colour / 100 };
+}
+const cLayer = L.geoJSON(WORLD, { pane: "fill", style: cStyle, onEachFeature: (f, l) => {
+  l.on("click", () => pickCountry(f.properties.iso, false));
+  l.on("mousemove", e => { const r = map.getContainer().getBoundingClientRect(); showTip(cTip(f.properties.iso), r.left + e.containerPoint.x, r.top + e.containerPoint.y); });
+  l.on("mouseout", hideTip);
+} }).addTo(map);
+function cTip(iso) {
+  if (S.layer === "nat") { const c = SITE.nat[iso]; return `<b>${esc(CN(iso))}</b><br>${c ? esc(c.l.slice(0, 3).map(x => x.d).join(", ")) + (c.l.length > 3 ? "..." : "") : "Not in the list"}`; }
+  if (S.layer === "brk") { const b = BRK[iso]; return `<b>${esc(CN(iso))}</b><br>${b ? esc(b.style_label) : "Not described"}`; }
+  if (S.layer === "meal") { const m = MEAL[iso]; return `<b>${esc(CN(iso))}</b><br>${m ? (m.main_meal ? MEALN[m.main_meal] : "Times stated") : "Not stated"}`; }
+  return `<b>${esc(CN(iso))}</b><br>${fmt(cntPlaced[iso] || 0)} dishes placed in regions`;
+}
+function restyle() { cLayer.setStyle(cStyle); if (regLayer) regLayer.setStyle(rStyle); drawPts(); }
+
+/* ---------- regions (loaded on first use) ---------- */
+let REG = null, regLayer = null, regionsOn = false, regLoading = null; const regCountries = new Set(); const regIndex = {};
+const regLabels = L.layerGroup();
+function loadRegions() {
+  if (regLoading) return regLoading;
+  regLoading = fetch("data/regions.json").then(r => r.json()).then(j => {
+    REG = j; j.features.forEach(f => { regIndex[f.properties.k] = f; });
+    regLayer = L.geoJSON(j, { pane: "regions", style: rStyle, filter: () => true, onEachFeature: (f, l) => {
+      f.properties._l = l;
+      l.on("click", e => { L.DomEvent.stopPropagation(e); pickRegion(f.properties.k, false); });
+      l.on("mousemove", e => { const r = map.getContainer().getBoundingClientRect(); showTip(`<b>${esc(f.properties.n)}</b> · ${esc(CN(f.properties.i))}<br>${fmt(f.properties.c)} dish${f.properties.c === 1 ? "" : "es"}${byReg[f.properties.k] ? ": " + esc(byReg[f.properties.k].slice(0, 3).map(d => d.n).join(", ")) : ""}`, r.left + e.containerPoint.x, r.top + e.containerPoint.y); });
+      l.on("mouseout", hideTip);
+    } });
+    return j;
+  });
+  return regLoading;
+}
+function rStyle(f) {
+  const p = f.properties, on = regCountries.has(p.i), c = rcol(p.c), sel = p.k === S.reg;
+  if (!on) return { opacity: 0, fillOpacity: 0, weight: 0, interactive: false };
+  return { color: sel ? css("--fg") : (isDark() ? "#6b6270" : "#fff"), weight: sel ? 2.6 : (LY.borders ? .8 : 0), fillColor: c || css("--land"), fillOpacity: (c ? .92 : .45) * LY.colour / 100, opacity: 1 };
+}
+function regionsForView() {
+  if (S.layer !== "reg" || !REG) { if (S.layer === "reg" && map.getZoom() >= 3.5) loadRegions().then(regionsForView); return; }
+  const z = map.getZoom(), bb = map.getBounds();
+  const want = new Set();
+  if (z >= 3.5) WORLD.features.forEach(f => { const i = f.properties.iso; if (cntPlaced[i] && L.geoJSON(f).getBounds().intersects(bb)) want.add(i); });
+  if (S.focus) want.add(S.focus);
+  const changed = want.size !== regCountries.size || [...want].some(i => !regCountries.has(i));
+  if (changed) { regCountries.clear(); want.forEach(i => regCountries.add(i)); if (["CHN"].some(i => want.has(i))) { regCountries.add("HKG"); regCountries.add("MAC"); } }
+  regionsOn = regCountries.size > 0;
+  if (regionsOn && !map.hasLayer(regLayer)) regLayer.addTo(map);
+  if (!regionsOn && map.hasLayer(regLayer)) map.removeLayer(regLayer);
+  if (changed) { cLayer.setStyle(cStyle); regLayer.setStyle(rStyle); }
+  regionLabels(); drawPts();
+}
+function regionLabels() {
+  regLabels.clearLayers();
+  if (S.layer !== "reg" || !regionsOn || map.getZoom() < 4.5) { map.removeLayer(regLabels); return; }
+  const bb = map.getBounds(), boxes = [];
+  const fs = REG.features.filter(f => regCountries.has(f.properties.i) && f.properties.c > 0).sort((a, b) => b.properties.c - a.properties.c);
+  for (const f of fs) {
+    const l = f.properties._l; if (!l) continue; const c = l.getBounds().getCenter(); if (!bb.contains(c)) continue;
+    const pt = map.latLngToContainerPoint(c), w = Math.max(f.properties.n.length, 6) * 6.4;
+    const bx = [pt.x - w / 2, pt.y - 10, pt.x + w / 2, pt.y + 14];
+    if (boxes.some(o => bx[0] < o[2] && bx[2] > o[0] && bx[1] < o[3] && bx[3] > o[1])) continue; boxes.push(bx);
+    L.marker(c, { pane: "names", interactive: false, keyboard: false, icon: L.divIcon({ className: "regL", html: `${esc(f.properties.n)}<small>${f.properties.c}</small>`, iconSize: [w, 24], iconAnchor: [w / 2, 10] }) }).addTo(regLabels);
+    if (boxes.length > 60) break;
+  }
+  regLabels.addTo(map);
+}
+/* dish points: only for dishes with a mapped place, shown when zoomed in */
+const ptLayer = L.layerGroup();
+function drawPts() {
+  ptLayer.clearLayers();
+  if (S.layer !== "reg" || map.getZoom() < 5) { map.removeLayer(ptLayer); return; }
+  const bb = map.getBounds().pad(.1); let n = 0;
+  for (const d of D) {
+    if (d.lat == null || !bb.contains([d.lat, d.lon])) continue;
+    L.circleMarker([d.lat, d.lon], { pane: "pts", radius: 4.5, weight: 1.2, color: isDark() ? "#111" : "#fff", fillColor: FAMC[d.f], fillOpacity: .95 })
+      .on("click", e => { L.DomEvent.stopPropagation(e); pickDish(d, false); })
+      .on("mouseover", e => { const r = map.getContainer().getBoundingClientRect(); showTip(`<b>${esc(d.n)}</b><br>${esc(d.p)}`, r.left + e.containerPoint.x, r.top + e.containerPoint.y); })
+      .on("mouseout", hideTip).addTo(ptLayer);
+    if (++n > 900) break;
+  }
+  ptLayer.addTo(map);
+}
+
+/* ---------- legend, side panel, note ---------- */
+function legend() {
+  const e = document.getElementById("legend"); let h = "";
+  if (S.layer === "nat") { const used = new Set(Object.values(SITE.nat).map(c => c.f)); h = FAMORDER.filter(f => used.has(f)).map(f => `<span><i style="background:${FAMC[f]}"></i>${esc(SITE.fam[f])}</span>`).join(""); }
+  else if (S.layer === "brk") h = Object.keys(STYC).map(s => `<span><i style="background:${STYC[s]}"></i>${esc(SITE.styles[s])}</span>`).join("");
+  else if (S.layer === "meal") h = Object.keys(MEALC).map(s => `<span><i style="background:${MEALC[s]}"></i>${MEALN[s]}</span>`).join("") + `<span><i class="h" style="background-color:${MEALC.midday}"></i>Regional statement</span><span><i style="background:transparent;border:1px dashed var(--muted)"></i>Times only</span>`;
+  else h = RB.map((b, i) => `<span><i style="background:${rcol(b)}"></i>${b}${i < RB.length - 1 ? " to " + (RB[i + 1] - 1) : " or more"}</span>`).join("") + `<span>dishes per country or region</span>` + (map.getZoom() >= 5 ? FAMORDER.slice(0, 10).map(f => `<span><i style="background:${FAMC[f]};border-radius:50%"></i>${esc(SITE.fam[f])}</span>`).join("") : "");
+  e.innerHTML = h;
+  document.getElementById("mapsrc").textContent = SRC[S.layer] + " Outlines: Natural Earth. Base map tiles © Esri.";
+}
+function note(h) { document.getElementById("mapnote").innerHTML = h || ""; }
+function side() {
+  const box = document.getElementById("side"), iso = S.sel; let h = "";
+  if (S.layer === "nat") {
+    const c = SITE.nat[iso];
+    if (!c) h = `<h4>National dishes</h4><div class="big">${esc(CN(iso))}</div><p class="sub">Not in Wikipedia's list.</p>`;
+    else {
+      h = `<h4>National dishes</h4><div class="big">${esc(CN(iso))}</div><p><span class="chip" style="background:${FAMC[c.f]}">${esc(SITE.fam[c.f])}</span></p>`;
+      const ph = c.l.find(x => x.ph); if (ph) h += photo(ph.ph).replace("<figcaption>", `<figcaption>${esc(ph.d)}. `);
+      h += `<ol>` + c.l.map(x => `<li>${wlink(x.w, x.d)}${x.x ? ` <small>${esc(x.x)}</small>` : ""}</li>`).join("") + `</ol>`;
+      if (c.parts.length) h += `<h4>Parts of the country</h4><ul>` + c.parts.map(p => `<li><b>${esc(p.n)}</b>: ${esc(p.d.join(", "))}</li>`).join("") + `</ul>`;
+      h += `<p class="sub">Dishes suggested as national dishes in English Wikipedia's list, in its order.</p>`;
+    }
+    note(c ? `<b>${esc(CN(iso))}</b>: ${esc(c.l[0].d)}` : "");
+  } else if (S.layer === "brk") {
+    const b = BRK[iso];
+    h = `<h4>Breakfast</h4><div class="big">${esc(CN(iso))}</div>` + (b ? `<p><span class="chip" style="background:${STYC[b.style]}">${esc(b.style_label)}</span></p><p>${esc(b.foods[0].toUpperCase() + b.foods.slice(1))}.</p><p class="sub">From the '${esc(b.source_section)}' section of <a href="${esc(b.source)}" target="_blank" rel="noopener">Breakfast by country</a> (summarised).</p>` : `<p class="sub">Not described in Wikipedia's 'Breakfast by country'.</p>`);
+    const c = SITE.course[iso]; if (c && c.breakfast) h += `<p class="sub">Wikidata also tags ${c.breakfast} dish${c.breakfast === 1 ? "" : "es"} from here with the course 'breakfast'.</p>`;
+    note(b ? `<b>${esc(CN(iso))}</b>: ${esc(b.style_label)}` : "");
+  } else if (S.layer === "meal") {
+    const m = MEAL[iso];
+    h = `<h4>Main meal</h4><div class="big">${esc(CN(iso))}</div>`;
+    if (!m) h += `<p class="sub">No statement found in the sources used.</p>`;
+    else {
+      if (m.main_meal) h += `<p><span class="chip" style="background:${MEALC[m.main_meal]}">${MEALN[m.main_meal]}</span></p>`;
+      h += `<p>${esc(m.note)}</p>`;
+      const rows = [];
+      if (m.lunch_from) rows.push(`<li>Lunch ${esc(m.lunch_from)}${m.lunch_to !== m.lunch_from ? " to " + esc(m.lunch_to) : ""} on the clock${m.lunch_mid_sun !== "" ? `; middle ${hhmm(m.lunch_mid_sun)} by the sun` : ""}</li>`);
+      if (m.dinner_from) rows.push(`<li>Dinner ${esc(m.dinner_from)}${m.dinner_to !== m.dinner_from ? " to " + esc(m.dinner_to) : ""} on the clock${m.dinner_mid_sun !== "" ? `; middle ${hhmm(m.dinner_mid_sun)} by the sun` : ""}</li>`);
+      if (rows.length) h += `<ul>${rows.join("")}</ul>`;
+      if (m.clock_ahead_of_sun_min !== "") h += `<p class="sub">Clocks here run on average ${Math.round(m.clock_ahead_of_sun_min)} minutes ${m.clock_ahead_of_sun_min >= 0 ? "ahead of" : "behind"} the sun (<a href="https://maps.tristanhotham.com/clock-vs-sun/">clock-vs-sun</a>).</p>`;
+      h += `<p class="sub">Source: <a href="${esc(m.source)}" target="_blank" rel="noopener">${esc(decodeURIComponent(m.source.split("/wiki/")[1]).replace(/_/g, " "))}</a>, English Wikipedia.</p>`;
+    }
+    note(m && m.main_meal ? `<b>${esc(CN(iso))}</b>: ${MEALN[m.main_meal].toLowerCase()}` : "");
+  } else {
+    if (S.reg && regIndex[S.reg]) {
+      const f = regIndex[S.reg].properties, L0 = byReg[S.reg] || [];
+      h = `<h4>Regional dishes · ${esc(CN(f.i))}</h4><div class="big">${esc(f.n)}</div><p class="sub">${fmt(L0.length)} dish${L0.length === 1 ? "" : "es"} placed here. Strongest evidence shown for each.</p>`;
+      const ph = SITE.regphoto[S.reg]; if (ph) h += photo(ph).replace("<figcaption>", `<figcaption>${esc(ph.n)}. `);
+      h += `<ol>` + L0.slice(0, 60).map(d => `<li>${wlink(d.w, d.n)}<span class="ev" title="${esc(EVT[d.e])}">${EVN[d.e]}</span>${d.x ? `<br><small>${esc(d.x)}</small>` : ""}</li>`).join("") + `</ol>`;
+      if (L0.length > 60) h += `<p class="sub">And ${L0.length - 60} more in data/regional_dishes.csv.</p>`;
+      note(`<b>${esc(f.n)}</b>: ${fmt(L0.length)} dishes${L0[0] ? ", e.g. " + esc(L0.slice(0, 2).map(d => d.n).join(", ")) : ""}`);
+    } else {
+      const n = cntPlaced[iso] || 0, regs = REG ? REG.features.filter(f => f.properties.i === iso && f.properties.c > 0).sort((a, b) => b.properties.c - a.properties.c) : [];
+      h = `<h4>Regional dishes</h4><div class="big">${esc(CN(iso))}</div><p class="sub">${fmt(n)} dishes placed in regions.${REG ? "" : " Loading regions..."}</p>`;
+      if (regs.length) h += `<ol>` + regs.slice(0, 25).map(f => `<li><span class="go" data-reg="${esc(f.properties.k)}">${esc(f.properties.n)}</span> <small>${f.properties.c}: ${esc((byReg[f.properties.k] || []).slice(0, 3).map(d => d.n).join(", "))}</small></li>`).join("") + `</ol>`;
+      else if (REG) h += `<p class="sub">No dish here has a recorded region in Wikidata.</p>`;
+      note(`<b>${esc(CN(iso))}</b>: ${fmt(n)} dishes with a region`);
+    }
+  }
+  box.innerHTML = h;
+  box.querySelectorAll("[data-reg]").forEach(e => e.onclick = () => pickRegion(e.dataset.reg, true));
+}
+const hhmm = h => { const m = Math.round(+h * 60); return `${Math.floor(m / 60)}:${String(m % 60).padStart(2, "0")}`; };
+function toMap() { if (small()) document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "start" }); }
+
+/* ---------- actions ---------- */
+function setLayer(l, keep) {
+  S.layer = l; document.querySelectorAll("#layerTabs .btn").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === l));
+  if (l !== "reg") { S.reg = null; S.focus = null; if (regLayer) map.removeLayer(regLayer); regionsOn = false; regCountries.clear(); map.removeLayer(regLabels); }
+  else loadRegions().then(() => { regionsForView(); side(); });
+  restyle(); legend(); side();
+}
+function fitIso(iso) { const f = WORLD.features.find(x => x.properties.iso === iso); if (!f) return; const b = L.geoJSON(f).getBounds(); const FIT = { USA: [[24, -125], [50, -66]], FRA: [[41.3, -5.2], [51.2, 9.6]], ESP: [[35.8, -9.5], [43.9, 4.4]], PRT: [[36.9, -9.6], [42.2, -6.1]], NOR: [[57.9, 4.5], [71.2, 31]], RUS: [[41, 27], [70, 140]], GBR: [[49.9, -8.2], [58.7, 1.8]], NLD: [[50.7, 3.3], [53.6, 7.3]], CHN: [[18, 73], [53.6, 135]], CHL: [[-56, -76], [-17.5, -66]] }; map.fitBounds(FIT[iso] || b, { padding: [10, 10], maxZoom: 7 }); }
+function pickCountry(iso, move) {
+  S.sel = iso; S.reg = null;
+  if (S.layer === "reg") { S.focus = iso; loadRegions().then(() => { regionsForView(); side(); }); }
+  if (move) { fitIso(iso); toMap(); }
+  restyle(); side();
+}
+function pickRegion(k, move) {
+  loadRegions().then(() => {
+    if (S.layer !== "reg") setLayer("reg");
+    const f = regIndex[k]; if (!f) return; S.reg = k; S.sel = f.properties.i; S.focus = f.properties.i;
+    regionsForView();
+    if (move) { map.fitBounds(f.properties._l.getBounds(), { padding: [20, 20], maxZoom: 8 }); toMap(); }
+    regLayer.setStyle(rStyle); side();
+  });
+}
+function pickDish(d, move) {
+  if (S.layer !== "reg") setLayer("reg");
+  pickRegion(d.r[0], false);
+  if (move) { if (d.lat != null) map.setView([d.lat, d.lon], 7); else loadRegions().then(() => { const f = regIndex[d.r[0]]; if (f) map.fitBounds(f.properties._l.getBounds(), { maxZoom: 7 }); }); toMap(); }
+  if (d.lat != null) L.popup({ autoPan: false }).setLatLng([d.lat, d.lon]).setContent(`<b>${esc(d.n)}</b><br>${esc(d.p)}<br><small>${esc(EVT[d.e])}</small>`).openOn(map);
+}
+document.querySelectorAll("#layerTabs .btn").forEach(b => b.onclick = () => setLayer(b.dataset.l));
+document.querySelectorAll("[data-show]").forEach(b => b.onclick = () => { setLayer(b.dataset.show); if (b.dataset.focus) pickCountry(b.dataset.focus, true); else { document.getElementById("atlas").scrollIntoView({ behavior: "smooth" }); } });
+(function focusRow() {
+  const row = document.getElementById("focusRow");
+  const F = [["ESP", "Spain"], ["ITA", "Italy"], ["FRA", "France"], ["GBR", "UK"], ["IRL", "Ireland"], ["DEU", "Germany"], ["MEX", "Mexico"], ["USA", "US"], ["CHN", "China"], ["IND", "India"], ["JPN", "Japan"], ["TUR", "Turkey"], ["IDN", "Indonesia"], ["WLD", "World"]];
+  F.forEach(([iso, n]) => { const b = document.createElement("button"); b.className = "btn"; b.textContent = n; b.onclick = () => { if (iso === "WLD") { map.setView([28, 12], small() ? 1 : 2); S.focus = null; regionsForView(); toMap(); return; } if (S.layer === "nat" || S.layer === "brk" || S.layer === "meal") pickCountry(iso, true); else pickCountry(iso, true); }; row.appendChild(b); });
+})();
+
+/* ---------- search: countries, regions, dishes ---------- */
+(function search() {
+  const inp = document.getElementById("q"), sug = document.getElementById("sug"); let opts = [], k = -1;
+  const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const natD = []; Object.entries(SITE.nat).forEach(([iso, c]) => c.l.forEach(x => natD.push({ t: "nd", n: x.d, iso })));
+  function build(q) {
+    const nq = norm(q); if (nq.length < 2) return [];
+    const out = [];
+    WORLD.features.forEach(f => { const n = CN(f.properties.iso); if (norm(n).includes(nq)) out.push({ t: "c", n, iso: f.properties.iso, s: norm(n).startsWith(nq) ? 3 : 1 }); });
+    if (REG) REG.features.forEach(f => { if (f.properties.c && norm(f.properties.n).includes(nq)) out.push({ t: "r", n: f.properties.n, k: f.properties.k, iso: f.properties.i, s: norm(f.properties.n).startsWith(nq) ? 2.5 : 1 }); });
+    D.forEach(d => { if (norm(d.n).includes(nq)) out.push({ t: "d", n: d.n, d, s: (norm(d.n).startsWith(nq) ? 2 : 1) + Math.min(d.s, 80) / 100 }); });
+    natD.forEach(x => { if (norm(x.n).includes(nq)) out.push({ t: "nd", n: x.n, iso: x.iso, s: norm(x.n).startsWith(nq) ? 1.8 : .9 }); });
+    return out.sort((a, b) => b.s - a.s).slice(0, 12);
+  }
+  const lab = o => o.t === "c" ? `${esc(o.n)} <span>country</span>` : o.t === "r" ? `${esc(o.n)} <span>region, ${esc(CN(o.iso))}</span>` : o.t === "d" ? `${esc(o.n)} <span>${esc(byReg[o.d.r[0]] && regIndexName(o.d.r[0]))}</span>` : `${esc(o.n)} <span>national dish, ${esc(CN(o.iso))}</span>`;
+  const show = () => { sug.innerHTML = opts.map((o, i) => `<li role="option" aria-selected="${i === k}" data-i="${i}">${lab(o)}</li>`).join(""); sug.style.display = opts.length ? "block" : "none"; };
+  const choose = o => { sug.style.display = "none"; inp.value = o.n; inp.blur();
+    if (o.t === "c") pickCountry(o.iso, true); else if (o.t === "r") pickRegion(o.k, true); else if (o.t === "d") pickDish(o.d, true); else { setLayer("nat"); pickCountry(o.iso, true); } };
+  inp.addEventListener("focus", () => loadRegions());
+  inp.addEventListener("input", () => { opts = build(inp.value); k = -1; show(); });
+  inp.addEventListener("keydown", e => { if (e.key === "ArrowDown") { k = Math.min(opts.length - 1, k + 1); show(); e.preventDefault(); } else if (e.key === "ArrowUp") { k = Math.max(0, k - 1); show(); e.preventDefault(); } else if (e.key === "Enter" && opts.length) { choose(opts[Math.max(0, k)]); } else if (e.key === "Escape") { sug.style.display = "none"; } });
+  sug.addEventListener("click", e => { const li = e.target.closest("li"); if (li) choose(opts[+li.dataset.i]); });
+  document.addEventListener("click", e => { if (!e.target.closest(".searchbox")) sug.style.display = "none"; });
+})();
+function regIndexName(k) { const f = regIndex[k]; return f ? f.properties.n + ", " + CN(f.properties.i) : CN(k.split(":")[0]); }
+
+/* ---------- charts ---------- */
+function hbars(box, rows, opts) {
+  resp(box, (w, sm) => {
+    const maxLab = Math.max(...rows.map(r => String(r.lab ?? r.v).length)), lw = sm ? Math.min(150, w * .42) : 230, rh = 26, h = rows.length * rh + 10, x0 = lw, x1 = w - 10 - maxLab * 7.4, max = Math.max(...rows.map(r => r.v)) || 1;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": opts.aria }, box);
+    rows.forEach((r, i) => {
+      const y = 4 + i * rh, bw = Math.max(r.v > 0 ? 2 : 0, (x1 - x0) * r.v / max);
+      const t = lbl(svg, x0 - 8, y + 16, sm && r.n.length > 22 ? r.n.slice(0, 21) + "." : r.n, "lab", "end");
+      const b = el("rect", { x: x0, y: y + 3, width: bw, height: rh - 9, fill: r.c, rx: 2 }, svg);
+      lbl(svg, x0 + bw + 6, y + 16, r.lab ?? String(r.v), "lab b");
+      if (r.tip) [b, t].forEach(e => { e.addEventListener("mousemove", ev => showTip(r.tip, ev.clientX, ev.clientY)); e.addEventListener("mouseleave", hideTip); });
+    });
+  });
+}
+hbars(document.getElementById("famChart"), R.national.family_first.map(f => ({ n: f.name, v: f.n, c: FAMC[f.f], lab: `${f.n} (${pc(f.share)})`,
+  tip: `<b>${esc(f.name)}</b><br>` + esc(Object.entries(SITE.nat).filter(([i, c]) => c.f === f.f).slice(0, 8).map(([i, c]) => `${CN(i)}: ${c.l[0].d}`).join("; ")) })), { aria: "Bar chart of national dish families" });
+hbars(document.getElementById("brkChart"), R.breakfast.styles.map(s => ({ n: s.name, v: s.n, c: STYC[s.s],
+  tip: `<b>${esc(s.name)}</b><br>` + esc(SITE.brk.filter(b => b.style === s.s).map(b => CN(b.iso3)).join(", ")) })), { aria: "Bar chart of breakfast styles" });
+hbars(document.getElementById("regChart"), R.regional.top_countries.map(c => { const fc = R.regional.focus[c.iso]; return { n: c.name, v: c.n, c: "#C2412D", lab: `${fmt(c.n)}` + (fc ? ` · ${fc.regions_with}/${fc.regions} regions` : "") }; }), { aria: "Bar chart of placed dishes by country" });
+hbars(document.getElementById("courseChart"), [{ n: "Breakfast", v: R.breakfast.wd_breakfast_items, c: STYC.sweet }, { n: "Main course", v: R.main_meal.wd_main_items, c: "#A8322D" }, { n: "Lunch", v: R.main_meal.wd_lunch_items, c: MEALC.midday, lab: "0" }, { n: "Dinner", v: R.main_meal.wd_dinner_items, c: MEALC.evening, lab: "0" }], { aria: "Bar chart of Wikidata dishes by course" });
+/* focus cards */
+(function cards() {
+  const box = document.getElementById("focusCards");
+  ["ESP", "GBR", "ITA", "JPN", "MEX", "IND"].forEach(iso => { const f = R.regional.focus[iso]; const d = document.createElement("div"); d.className = "card";
+    d.innerHTML = `<b>${esc(f.name)}</b><div class="big">${fmt(f.dishes)} <span>dishes in ${f.regions_with} of ${f.regions} regions</span></div>Most: ${esc(f.top_region)} (${f.top_n})<br><button class="btn">Show on the map</button>`;
+    d.querySelector("button").onclick = () => { setLayer("reg"); pickCountry(iso, true); document.getElementById("atlas").scrollIntoView({ behavior: "smooth" }); }; box.appendChild(d); });
+})();
+/* meal times: clock (hollow) and sun (solid) for lunch and dinner */
+(function timeChart() {
+  const rows = SITE.main.filter(m => !m.regional_statement && (m.lunch_mid_clock !== "" || m.dinner_mid_clock !== "") && m.clock_ahead_of_sun_min !== "")
+    .sort((a, b) => (+(a.lunch_mid_sun || a.dinner_mid_sun) - +(b.lunch_mid_sun || b.dinner_mid_sun)));
+  resp(document.getElementById("timeChart"), (w, sm) => {
+    const lw = sm ? 92 : 150, rh = 22, top = 26, h = top + rows.length * rh + 8, h0 = 10, h1 = 23, X = t => lw + (w - lw - 12) * (t - h0) / (h1 - h0);
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Lunch and dinner times on the clock and by the sun" }, document.getElementById("timeChart"));
+    for (let t = h0; t <= h1; t++) { if (sm && t % 2) continue; el("line", { x1: X(t), x2: X(t), y1: top - 6, y2: h, stroke: css("--rule") }, svg); lbl(svg, X(t), 14, `${t}:00`, "lab s m", "middle"); }
+    el("line", { x1: X(12), x2: X(12), y1: top - 6, y2: h, stroke: css("--gold"), "stroke-width": 2, "stroke-dasharray": "4 3" }, svg);
+    rows.forEach((m, i) => {
+      const y = top + i * rh + 11;
+      const t = lbl(svg, lw - 8, y + 4, sm && CN(m.iso3).length > 13 ? CN(m.iso3).slice(0, 12) + "." : CN(m.iso3), "lab" + (m.iso3 === "ESP" ? " b" : ""), "end");
+      [["lunch", MEALC.midday], ["dinner", MEALC.evening]].forEach(([k, c]) => {
+        const cl = m[k + "_mid_clock"], sn = m[k + "_mid_sun"]; if (cl === "" || sn === "") return;
+        el("line", { x1: X(+cl), x2: X(+sn), y1: y, y2: y, stroke: c, "stroke-width": 2, "stroke-opacity": .6 }, svg);
+        el("circle", { cx: X(+cl), cy: y, r: 4.5, fill: css("--bg"), stroke: c, "stroke-width": 2 }, svg);
+        const s = el("circle", { cx: X(+sn), cy: y, r: 5, fill: c }, svg);
+        s.addEventListener("mousemove", ev => showTip(`<b>${esc(CN(m.iso3))}</b>, ${k}<br>clock ${hhmm(cl)} · sun ${hhmm(sn)}`, ev.clientX, ev.clientY)); s.addEventListener("mouseleave", hideTip);
+      });
+    });
+    lbl(svg, X(12) + 4, top + 2, "solar noon", "lab s m");
+  });
+})();
+
+/* ---------- start ---------- */
+document.getElementById("theme").onclick = () => { const r = document.documentElement; r.dataset.theme = isDark() ? "light" : "dark"; setTiles(); legend(); redraws.forEach(f => f()); };
+setTiles(); legend(); side();
+map.on("zoomend", legend);
+</script>
+</body>
+</html>

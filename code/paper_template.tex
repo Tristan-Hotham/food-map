@@ -1,0 +1,153 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\newfontfamily\headfont{Inter}[UprightFont=*-ExtraBold,BoldFont=*-ExtraBold,Extension=.otf,Path=/usr/share/fonts/opentype/inter/]
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{graphicx,booktabs,float,caption,array,xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage[round]{natbib}
+\usepackage{setspace}
+\setstretch{1.05}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\titleformat{\section}{\headfont\Large}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\headfont\large}{\thesubsection}{0.8em}{}
+\captionsetup{font=small,labelfont=bf}
+\urlstyle{same}
+\hypersetup{pdftitle={What Does the World Eat? National Dishes, Breakfasts, Regional Dishes and the Main Meal of the Day},pdfauthor={Tristan Hotham}}
+
+\begin{document}
+\begin{center}
+{\Large\bfseries What Does the World Eat?\par}
+\vspace{0.4em}
+{\large National dishes, breakfasts, regional dishes and the main meal of the day\\from Wikipedia and Wikidata\par}
+\vspace{1.2em}
+{\large Tristan Hotham\par}
+\vspace{0.3em}
+{\small Independent researcher\\
+ORCID: 0000-0003-4931-9349\\
+DOI: \href{https://doi.org/{{meta.doi}}}{https://doi.org/{{meta.doi}}}\par}
+\vspace{0.8em}
+2026
+\end{center}
+
+\begin{quote}
+\small
+\begin{center}\textbf{Abstract}\end{center}
+What does each country eat for breakfast, lunch and dinner, which dish does it hold up as its own, and which dishes belong to one region rather than the whole country? I assemble an open atlas of these questions from English Wikipedia and Wikidata. Wikipedia's list of national dishes covers {{national.n_countries|int}} countries and territories; the first dish listed is most often meat or a grill ({{national.family_first.0.n|int}}, {{national.family_first.0.share|pct}}), then a starchy staple such as a maize or cassava porridge ({{national.family_first.1.n|int}}), then a soup, stew or curry ({{national.family_first.2.n|int}}). The article on breakfast around the world describes {{breakfast.n_countries|int}} countries, which fall into eight styles; in Europe {{breakfast.europe.bread|int}} of {{breakfast.europe.n|int}} countries start with bread and savoury toppings and {{breakfast.europe.sweet|int}} with coffee and something sweet. Wikidata places {{regional.n_dishes|int}} of {{regional.n_wikidata_food|int}} foods with a country of origin ({{regional.share_placed|pct}}) in one of {{regional.n_regions|int}} states, provinces or regions, but coverage is very uneven: Japan, Indonesia and Italy together account for {{regional.share_top3|pct}}. Separate lunch and dinner maps are not supported: no Wikidata food is tagged with lunch or dinner as its course, against {{main_meal.wd_main_items|int}} main courses. Instead I code which meal is the main meal where sources say so: midday in {{main_meal.counts.midday|int}} of {{main_meal.n_coded|int}} coded countries and evening in {{main_meal.counts.evening|int}}. Converting stated meal times to sun time, Spain's lunch at 2 pm falls at {{spain.lunch_sun|raw}} by the sun, and its supper only {{spain.gap_sun_min|int}} minutes after Britain's evening meal. The atlas describes what the open record claims, not what people eat every day.
+
+\textbf{Keywords:} food; national dishes; breakfast; regional cuisine; meal times; Wikidata; Wikipedia; open data; mapping; solar time
+\end{quote}
+
+\section{Introduction}
+Food is one of the first things people ask about a place. What do they eat for breakfast? What is the national dish? Is the big meal at lunch or in the evening? Inside many countries the questions become regional: fabada belongs to Asturias, paella to Valencia, the hotpot to Lancashire and takoyaki to Osaka. These questions are easy to ask and surprisingly hard to answer at scale with open data, because what people eat is rarely recorded as data at all. Surveys of diet exist for some countries, but they record nutrients and food groups rather than named dishes, and they are not comparable across countries.
+
+What does exist at world scale is the encyclopaedic record. English Wikipedia keeps a long list of dishes that have been suggested as national dishes, an article describing breakfast country by country, articles on lunch and dinner with national sections, and hundreds of articles and categories on national and regional cuisines. Wikidata, the structured database behind Wikipedia \citep{wikidata}, holds tens of thousands of food items, many with a country of origin, a place of origin, a cuisine or a course. This study asks how far that record can answer the questions above, and builds an interactive atlas from the parts that can. It is deliberately descriptive. The record is written by volunteers, leans towards English-language sources and is far richer for some countries than for others; I report coverage alongside every result.
+
+\section{Data}
+All web data were retrieved on {{meta.retrieved}} in a browser, through the Wikipedia API and the QLever SPARQL endpoint for Wikidata \citep{qlever}.
+
+\textbf{National dishes.} The section `By country' of the English Wikipedia article `National dish' \citep{wp_national}. Each line names a country and the dishes suggested for it; indented lines name parts of a country. The article states that it is not a definitive list. Linked dishes were resolved to Wikidata items through the Wikipedia API, following redirects.
+
+\textbf{Breakfast.} The article `Breakfast by country' \citep{wp_breakfast}, which has a section for each of {{breakfast.n_countries|int}} countries or groups of countries.
+
+\textbf{Main meal and meal times.} The articles `Lunch' and `Dinner' \citep{wp_lunch,wp_dinner} and the English Wikipedia articles on {{meta.n_cuisine_articles|int}} national and regional cuisines (those Wikidata lists as a cuisine with an English article), from which every sentence mentioning breakfast, lunch, dinner, supper, the main meal or meal times was extracted for reading.
+
+\textbf{Dishes and places.} Every Wikidata item that is an instance or subclass of \emph{dish}, \emph{bread}, \emph{cheese}, \emph{sausage}, \emph{pastry} or \emph{dessert}, with its English label, English Wikipedia article, number of sitelinks, country of origin (P495), cuisine (P2012), course (P8431), image (P18) and the places given as indigenous to (P2341), location (P276), located in (P131), location of creation (P1071), place of origin (P189) or location of formation (P740). The places were fetched with their coordinates, country and class. For the {{meta.n_cuisine_cats|int}} cuisines with an English Wikipedia category, the direct members of the category were fetched with their Wikidata items.
+
+\textbf{Boundaries and names.} Countries from Natural Earth at 1:50m and states and provinces at 1:10m \citep{naturalearth}; city names from GeoNames \citep{geonames}; towns, cities and counties of Great Britain from OS Open Names \citep{osnames}. Clock and sun offsets for each country come from my study of clock time against solar time \citep{clockvsun}.
+
+\section{Methods}
+\subsection{National dishes and their families}
+Each line of the list was parsed into a country and its linked dishes, in order. Country names were matched to Natural Earth outlines; dependent territories with their own outline (Puerto Rico, Guam, Greenland) keep their own entry. To summarise each country in one colour I take the first dish listed and assign it to one of a dozen families (Table~\ref{tab:fam}) by walking Wikidata's `subclass of' tree from the dish's classes to families such as \emph{rice dish}, \emph{soup}, \emph{stew}, \emph{porridge}, \emph{meat dish} or \emph{dumpling}, with an order of precedence (rice before meat, for example, so that a pilaf with lamb counts as rice). For the {{meta.n_famfix|int}} dish mentions (of {{meta.n_mentions_all|int}}) the tree does not reach, the family is assigned from the dish's description. The first-listed dish is a convention of the article, not a ranking of importance, and the families are broad.
+
+\subsection{Breakfast styles}
+Each country's section of `Breakfast by country' was summarised as a short list of the foods it names and assigned one of eight styles by the foods named first: coffee or tea with bread and something sweet; bread with cheese, cold meats and spreads; cereal and toast or a cooked breakfast; eggs, beans, tortillas and plantain; rice, soup and savoury sides; porridge, congee, buns and fritters; flatbreads, rice cakes and curries; and flatbread with beans, cheese, eggs and olives. Groups such as `Germany and Austria' or `Levant' are applied to each country they name. Countries the article does not describe are left blank.
+
+\subsection{Placing dishes in regions}
+Of {{regional.n_wikidata_food_all|int}} food items retrieved, brands, commercial products, fictional foods, museum objects and generic dish types were removed, and {{regional.n_wikidata_food|int}} items with a country of origin were kept. Historical states were mapped to today's country where the mapping is clear (Korea to South Korea for the historical peninsula, Ryukyu to Japan, West Germany to Germany); broad or ambiguous origins (the Ottoman Empire, the Levant, Europe) give no country.
+
+A dish is placed in a region by the strongest evidence available, in this order: (1) a place given in one of the location properties above; (2) a country of origin that is itself a place inside a country, such as Asturias; (3) a cuisine that is a regional cuisine with a place; (4) membership of the English Wikipedia category of a regional cuisine, provided the dish's country of origin is the region's country and it belongs to no more than two such regions; (5) a place named in the dish's English name, such as Bath bun, Lancashire hotpot or Fabada asturiana, matched against region names, GeoNames cities of 30,000 people or more, OS Open Names towns and counties, and a short table of adjectives (asturiana, napoletana, lyonnaise, Cornish, Sichuan). Places that are continents, cultural or historical regions, ethnic groups, Japanese macro-regions or whole countries never place a dish, so `Southern United States' or `England' does not drop a dish into one state or English region. Places become regions by point in polygon against Natural Earth's admin-1 units; for Spain, Italy, France and Portugal provinces are merged into their regions, and for the United Kingdom the units are England's regions plus Scotland, Wales and Northern Ireland. Links from regional cuisine articles to dishes were tested as a sixth source and dropped, because they proved too loose (the article on Welsh cuisine links trifle and toffee).
+
+\subsection{Main meal and meal times}
+A country was coded only where a sentence states which meal is the main, largest or heaviest, or gives clock times. Codes are midday, evening, shifting (a source describes a move from a midday to an evening main meal) and morning (one case, Lithuania, where the most filling meal is breakfast). The `Lunch' article's statement that in most Arab countries lunch, 1 to 4 pm, is the main meal was applied to nine Gulf and Levant states and is shown separately. Times were converted to sun time by subtracting each country's population-weighted mean lead of the clock over the sun, across the year and including daylight saving, from \citet{clockvsun}.
+
+\section{Results}
+\subsection{National dishes}
+The list covers {{national.n_countries|int}} countries and territories with {{national.n_mentions|int}} dish mentions and {{national.n_distinct|int}} distinct dishes. The median country has {{national.median_per_country|int}} suggestions; {{national.n_one|int}} have one, and {{national.max_country}} has the most, {{national.max_n|int}}. Table~\ref{tab:fam} and Figure~\ref{fig:nat} show the families of the first-listed dishes. Meat and grills lead, from the Argentine asado to Peking duck and the Turkish doner kebab. Starchy staples come second, with the stiff maize, cassava and plantain porridges of Africa (fufu, nshima, sadza, ugali) beside Romania's mămăligă and Belgium's frites. Rice dishes run from Central Asia's plov to the Gulf's kabsa and machboos. Some dishes are shared: the maize porridge Wikipedia files under {{national.shared.0.dish}} is listed under local names for {{national.shared.0.n|int}} countries, and {{national.shared.1.dish}} for {{national.shared.1.n|int}} in North Africa.
+
+{{TABLE_FAM}}
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_national_map.png}
+\caption{Family of each country's first-listed national dish in English Wikipedia's list. Equal Earth projection; Natural Earth outlines.}\label{fig:nat}\end{figure}
+
+\subsection{Breakfast}
+Of the {{breakfast.n_countries|int}} countries described, {{breakfast.styles.0.n|int}} have a breakfast of bread with cheese, cold meats and spreads, {{breakfast.styles.1.n|int}} coffee or tea with bread and something sweet, and {{breakfast.styles.2.n|int}} flatbread with beans, cheese, eggs and olives (Figure~\ref{fig:brk}). Europe divides between a savoury north and centre and a sweet south: {{breakfast.europe.sweet|int}} countries ({{breakfast.europe.sweet_names|list}}) are described with coffee and something sweet, against {{breakfast.europe.bread|int}} with savoury bread. Britain and Ireland share a style with the United States, Canada, Australia and New Zealand: cereal and toast in the week and a cooked breakfast at weekends. Central America eats eggs, beans, tortillas and plantain; Japan, Korea, Indonesia, Malaysia, Singapore, Myanmar and the Philippines build breakfast on rice. Wikidata tags {{breakfast.wd_breakfast_items|int}} dishes from {{breakfast.wd_breakfast_countries|int}} countries with the course `breakfast', too few to map.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_breakfast_map.png}
+\caption{Breakfast style of each country described in English Wikipedia's `Breakfast by country'. Blank: not described.}\label{fig:brk}\end{figure}
+
+\subsection{Regional dishes}
+{{regional.n_dishes|int}} dishes are placed in {{regional.n_regions|int}} regions of {{regional.n_countries|int}} countries. Table~\ref{tab:ev} gives the evidence used; most placements come from a place recorded in Wikidata. Coverage is highly uneven (Figure~\ref{fig:cov}). Japan has {{regional.focus.JPN.dishes|int}} placed dishes, in all {{regional.focus.JPN.regions|int}} prefectures; Indonesia {{regional.focus.IDN.dishes|int}}, with {{regional.top.0.name}} alone holding {{regional.top.0.n|int}}; Italy {{regional.focus.ITA.dishes|int}} in all {{regional.focus.ITA.regions|int}} regions. By contrast Mexico has {{regional.focus.MEX.dishes|int}}, Turkey {{regional.focus.TUR.dishes|int}} across {{regional.focus.TUR.regions_with|int}} of its {{regional.focus.TUR.regions|int}} provinces, and Ireland {{regional.focus.IRL.dishes|int}}. These differences reflect where volunteers have catalogued local foods in Wikidata, not how regional each country's food is.
+
+{{TABLE_EV}}
+
+\begin{figure}[tbp]\centering\includegraphics[width=.92\textwidth]{f_coverage.png}
+\caption{Dishes placed in a region, for the twelve countries with most; in brackets, regions with at least one dish out of all regions.}\label{fig:cov}\end{figure}
+
+Spain illustrates what the method can do where the record is good (Figure~\ref{fig:esp}). {{regional.focus.ESP.dishes|int}} Spanish dishes are placed in {{regional.focus.ESP.regions_with|int}} of {{regional.focus.ESP.regions|int}} regions. {{regional.spain.0.name}} has {{regional.spain.0.n|int}} (crema catalana, pa amb tomàquet, fuet), {{regional.spain.1.name}} {{regional.spain.1.n|int}} (gazpacho, salmorejo) and {{regional.spain.2.name}} {{regional.spain.2.n|int}}. Fabada asturiana sits in {{regional.examples.Fabada asturiana}}, paella in the {{regional.examples.paella}} and caldo galego in {{regional.examples.Caldo galego}}. In Britain the name rule does most of the work: {{regional.focus.GBR.dishes|int}} British dishes are placed, the {{regional.uk.0.name}} leading with {{regional.uk.0.n|int}} (Bath buns, stargazy pie, the Cornish pasty), and the North West holding the Eccles cake, Lancashire hotpot and Kendal mint cake. A dish named after a place was not necessarily first made there.
+
+\begin{figure}[tbp]\centering\includegraphics[width=.95\textwidth]{f_spain_regions.png}
+\caption{Spain and Portugal: dishes placed in each region, with two examples each. Natural Earth admin-1 units merged into regions.}\label{fig:esp}\end{figure}
+
+\subsection{Lunch, dinner and the main meal}
+No Wikidata food carries lunch or dinner as its course ({{main_meal.wd_lunch_items|int}} and {{main_meal.wd_dinner_items|int}}), while {{main_meal.wd_main_items|int}} carry `main course' and {{breakfast.wd_breakfast_items|int}} `breakfast'. Most dishes can be eaten at either meal, so maps of lunch and dinner dishes cannot be built honestly from this record. The question the record can answer is which meal is the main one (Figure~\ref{fig:meal}). Sources name the main meal for {{main_meal.n_named|int}} countries, plus the regional statement for most Arab countries. The midday main meal dominates in southern and eastern Europe, Latin America, the Middle East and Indonesia ({{main_meal.counts.midday|int}} countries); the evening main meal in the English-speaking countries, the Nordic countries, India, the Philippines and Italy ({{main_meal.counts.evening|int}}). Germany, Austria and Slovakia are described as moving from a midday to an evening main meal as work moved further from home.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_main_meal_map.png}
+\caption{Which meal is the main meal, where English Wikipedia's cuisine, lunch or dinner articles say so. Hatched: regional statement.}\label{fig:meal}\end{figure}
+
+\subsection{Meal times by the clock and by the sun}
+{{times.n_lunch|int}} countries have a stated lunch time (Figure~\ref{fig:times}, Table~\ref{tab:times}). By the clock, lunch ranges from around noon in the Nordic countries and North America to the middle of the afternoon in Mexico and Poland. By the sun the spread narrows: {{times.n_lunch_sun_before_1|int}} of {{times.n_lunch|int}} countries eat lunch before 1 pm sun time. Spain is the clearest case. Its clocks run on average {{spain.ahead_min|int}} minutes ahead of the sun, so the middle of its lunch window, 2 pm on the clock, is {{spain.lunch_sun|raw}} by the sun, {{times.spain_sun_vs_noon_min|int}} minutes after solar noon. Its supper, {{spain.dinner_clock|raw}} on the clock, is {{spain.dinner_sun|raw}} by the sun, {{spain.gap_sun_min|int}} minutes after Britain's average evening meal by the same measure ({{spain.gb_dinner_sun|raw}}); on the clock the gap is {{spain.gap_clock_min|int}} minutes. The latest lunches by the sun are in {{times.latest_sun.0.name}} ({{times.latest_sun.0.sun|raw}}) and {{times.latest_sun.1.name}} ({{times.latest_sun.1.sun|raw}}), both countries where lunch is the main meal.
+
+\begin{figure}[tbp]\centering\includegraphics[width=.9\textwidth]{f_meal_times.png}
+\caption{Middle of the stated lunch and dinner windows on the clock (hollow) and by the sun (solid). Sun time subtracts the country's mean lead of clock over sun \citep{clockvsun}.}\label{fig:times}\end{figure}
+
+{{TABLE_TIMES}}
+
+\section{Discussion}
+The atlas shows that the open encyclopaedic record can map food in broad strokes. National dishes cluster by region in ways that are easy to recognise: starchy porridges across Africa, rice across Asia and the Gulf, meat across the Americas and much of Europe. Breakfast has a clear geography, with a sweet Latin south of Europe set against a savoury north and centre, and a rice breakfast across East and South East Asia. The main meal is still eaten at midday across most of the world where the record speaks, and the evening main meal is concentrated in the English-speaking and Nordic countries.
+
+The Spanish case shows why meal times are best read against the sun. Spain is often described as eating late, and by the clock it does. But Spain keeps Central European Time far to the west of its meridian, and once that offset is removed its lunch is a midday meal and its supper falls within half an hour of Britain's. Late Spanish meals are, to a large extent, a clock effect.
+
+The regional layer shows the limits of the record most clearly. Where volunteers have entered places of origin systematically, as for Japan's prefectural foods, Indonesia's provincial dishes or Italy's protected products, the map fills in. Where they have not, it stays thin, whatever the cuisine. The name rule rescues Britain, where many regional dishes carry a town in their name, but it would mislead if read as a statement of origin: a Bath Oliver or a Chelsea bun is named after a place, not certified as made there.
+
+\section{Limitations}
+First, every source here is a written claim, not an observation of eating. Wikipedia's list of national dishes gathers suggestions from many writers, and the first dish listed is not necessarily the most important. Second, the breakfast styles and the main-meal codes are summaries of short texts, assigned with a fixed set of categories; other readings are possible, and only countries with a section or a statement are coded. Third, the regional placements inherit Wikidata's uneven coverage, its occasional errors (a few dishes are tied to the place of a later variant or of a restaurant), and the coarse simplification of admin-1 polygons near coasts. Category membership can be loose, and the name rule places dishes by name only. Fourth, sun time uses a single national offset; inside large countries the clock's lead over the sun varies by an hour or more. Finally, all counts are for one retrieval date and will change as the encyclopaedia changes.
+
+\section{Conclusion}
+The open record can answer `what is the national dish?' and `what is breakfast like?' for most countries, `which dishes come from this region?' well for some countries and poorly for others, and `what do people eat for lunch and for dinner?' hardly at all. An honest atlas maps the first three, says where the record is thin, and replaces the fourth with a question the record can answer: which meal is the main meal, and when is it eaten by the sun.
+
+\section*{Data and code availability}
+The interactive atlas is at \url{https://maps.tristanhotham.com/food-map/}. Data and code are at \url{https://github.com/Tristan-Hotham/food-map} and archived with this paper at \url{https://doi.org/{{meta.doi}}}. Derived data are released under CC BY-SA 4.0 and code under the MIT licence.
+
+\section*{AI statement}
+I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.
+
+\begin{thebibliography}{9}
+\bibitem[Bast and Buchhold(2017)]{qlever} Bast, H. and Buchhold, B. (2017) QLever: a query engine for efficient SPARQL+text search. \emph{Proceedings of the 2017 ACM Conference on Information and Knowledge Management}, 647 to 656. \url{https://qlever.cs.uni-freiburg.de/}
+\bibitem[GeoNames(2026)]{geonames} GeoNames (2026) GeoNames geographical database. CC BY 4.0. \url{https://www.geonames.org/}
+\bibitem[Hotham(2026)]{clockvsun} Hotham, T. (2026) How wrong is your clock? Clock time against solar time worldwide. \url{https://maps.tristanhotham.com/clock-vs-sun/}
+\bibitem[Natural Earth(2026)]{naturalearth} Natural Earth (2026) Admin 0 countries (1:50m) and admin 1 states and provinces (1:10m). Public domain. \url{https://www.naturalearthdata.com/}
+\bibitem[Ordnance Survey(2026)]{osnames} Ordnance Survey (2026) OS Open Names. Open Government Licence v3.0. \url{https://www.ordnancesurvey.co.uk/products/os-open-names}
+\bibitem[Vrandečić and Krötzsch(2014)]{wikidata} Vrandečić, D. and Krötzsch, M. (2014) Wikidata: a free collaborative knowledgebase. \emph{Communications of the ACM}, 57(10), 78 to 85.
+\bibitem[Wikipedia(2026a)]{wp_breakfast} Wikipedia contributors (2026) Breakfast by country. English Wikipedia, CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/Breakfast_by_country}
+\bibitem[Wikipedia(2026b)]{wp_dinner} Wikipedia contributors (2026) Dinner. English Wikipedia, CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/Dinner}
+\bibitem[Wikipedia(2026c)]{wp_lunch} Wikipedia contributors (2026) Lunch. English Wikipedia, CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/Lunch}
+\bibitem[Wikipedia(2026d)]{wp_national} Wikipedia contributors (2026) National dish. English Wikipedia, CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/National_dish}
+\end{thebibliography}
+\end{document}
